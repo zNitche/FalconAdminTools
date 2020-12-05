@@ -1,0 +1,786 @@
+FrameWidgetClass rootFrame {
+ position -0.00663 -0.01166
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ draggable 0
+ scriptclass ""
+ {
+  PanelWidgetClass panelFrame {
+   visible 1
+   ignorepointer 1
+   position 0.00522 0.01079
+   size 0.99122 0.98425
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_black_2
+   {
+    TextWidgetClass Title {
+     visible 1
+     ignorepointer 1
+     position 0 0.01531
+     size 0.5 0.111
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Normal
+     text "FalconTools v0.3"
+     font "gui/fonts/Metron-Bold28"
+     "exact text" 1
+     "size to text h" 1
+     "size to text v" 1
+     "text halign" center
+     "text valign" center
+    }
+    ButtonWidgetClass BtnGM {
+     visible 1
+     position 0.01191 0.01531
+     size 0.1459 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "GM"
+    }
+    ButtonWidgetClass BtnSAFE {
+     visible 1
+     position 0.84013 0.01638
+     size 0.1459 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "SAFE"
+    }
+    ButtonWidgetClass BtnKYS {
+     visible 1
+     position 0.16972 0.01531
+     size 0.1459 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "KYS"
+    }
+    TextWidgetClass PostitionTITLE {
+     ignorepointer 1
+     position 1568.67993 156.16901
+     size 166.903 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Position"
+     "text halign" center
+     "text valign" center
+    }
+    ButtonWidgetClass BtnHEAL {
+     visible 1
+     clipchildren 1
+     position 0.32752 0.01531
+     size 0.1459 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "HEAL"
+    }
+    TextWidgetClass StatsTITLE {
+     ignorepointer 1
+     position 1568.67993 55.4109
+     size 166.903 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Stats"
+     "text halign" center
+    }
+    TextWidgetClass GmCONTENT {
+     ignorepointer 1
+     position 1568.67993 105.78999
+     size 166.90399 50.3789
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text_proportion 0.5
+     "size to text h" 0
+     "size to text v" 0
+     "text halign" center
+     "text valign" center
+    }
+    PanelWidgetClass PanelWidget0 {
+     ignorepointer 1
+     position -5.66126 974.828
+     size 1889.20996 85.782
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+    }
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     position 1417.55005 42.8161
+     size 466.009 932.01202
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+    }
+    PanelWidgetClass PanelWidget2 {
+     ignorepointer 1
+     position 6.93413 46.1252
+     size 1410.60999 47.0699
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+    }
+    PanelWidgetClass PanelWidget3 {
+     ignorepointer 1
+     position 6.93411 8.34093
+     size 1876.62 35.78
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+    }
+    PanelWidgetClass PanelWidget4 {
+     ignorepointer 1
+     position 6.93347 571.79602
+     size 541.57404 403.03201
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+    }
+    TextWidgetClass WorldSettingsTITLE {
+     ignorepointer 1
+     position 6.93349 584.39099
+     size 541.57404 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "World Settings"
+     "text halign" center
+     "text valign" center
+    }
+    ButtonWidgetClass BtnLOADOUT {
+     visible 1
+     clipchildren 1
+     position 0.48289 0.01638
+     size 0.13099 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Adm Loadout"
+    }
+    ButtonWidgetClass BtnCAR {
+     visible 1
+     clipchildren 1
+     position 0.62578 0.01638
+     size 0.08336 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Car"
+    }
+    ButtonWidgetClass BtnApplyWorld {
+     visible 1
+     clipchildren 1
+     position 0.07723 0.09903
+     size 0.13373 0.04315
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Apply"
+    }
+    TextWidgetClass WorldTimeTITLE {
+     ignorepointer 1
+     position 6.9335 634.76898
+     size 163.73199 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Time"
+     "text halign" center
+     "text valign" center
+    }
+    EditBoxWidgetClass SetTimeBOX {
+     position 170.66501 634.77002
+     size 365.24802 50.3795
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    EditBoxWidgetClass SetPositionBOXX {
+     position 1518.30005 206.54799
+     size 340.06201 47.9997
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+    }
+    ButtonWidgetClass BtnApplyPosition {
+     visible 1
+     clipchildren 1
+     position 0.80609 0.60851
+     size 0.15481 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Set"
+    }
+    EditBoxWidgetClass SetPositionBOXY {
+     position 1518.30005 307.306
+     size 340.06201 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+    }
+    EditBoxWidgetClass SetPositionBOXZ {
+     position 1518.30005 256.92697
+     size 340.06201 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+    }
+    TextWidgetClass PostitionTITLE0 {
+     ignorepointer 1
+     position 1417.55005 206.54799
+     size 100.758 50.3787
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "X"
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass PostitionTITLE1 {
+     ignorepointer 1
+     position 1417.55005 256.92697
+     size 100.758 50.3788
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Z"
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass PostitionTITLE2 {
+     ignorepointer 1
+     position 1417.55005 307.306
+     size 100.758 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Y"
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass PlayersSettingsTITLE {
+     ignorepointer 1
+     position 19.5282 42.8162
+     size 528.98004 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Players Settings"
+     "text halign" center
+     "text valign" center
+    }
+    PanelWidgetClass PanelWidget5 {
+     ignorepointer 1
+     position 6.93359 93.1926
+     size 541.57404 478.603
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+    }
+    EditBoxWidgetClass SpawnerBOX {
+     position 1430.14001 697.74298
+     size 327.46399 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     scaled 1
+    }
+    ButtonWidgetClass BtnSpawn {
+     visible 1
+     clipchildren 1
+     position 0.93982 0.29621
+     size 0.04012 0.04739
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Spawn"
+    }
+    TextWidgetClass SpawnerTITLE0 {
+     ignorepointer 1
+     position 1417.55005 634.77002
+     size 466.00201 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Item Spawner"
+     "text halign" center
+     "text valign" center
+    }
+    ButtonWidgetClass BtnSpawnCUSTOM1 {
+     visible 1
+     clipchildren 1
+     position 0.86627 0.16588
+     size 0.05349 0.05924
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Spawn 7"
+    }
+    ButtonWidgetClass BtnSpawnCUSTOM2 {
+     visible 1
+     clipchildren 1
+     position 0.92645 0.17012
+     size 0.05349 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Spawn 8"
+    }
+    ButtonWidgetClass BtnSpawnCUSTOM3 {
+     visible 1
+     clipchildren 1
+     position 0.75928 0.09903
+     size 0.22066 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Spawn 9"
+    }
+    ButtonWidgetClass BtnSpawnCUSTOM4 {
+     visible 1
+     clipchildren 1
+     position 0.92645 0.22936
+     size 0.05349 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Spawn 4"
+    }
+    ButtonWidgetClass BtnSpawnCUSTOM5 {
+     visible 1
+     clipchildren 1
+     position 0.75928 0.22936
+     size 0.04681 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Spawn 1"
+    }
+    ButtonWidgetClass BtnSpawnCUSTOM6 {
+     visible 1
+     clipchildren 1
+     position 0.81277 0.22936
+     size 0.04681 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Spawn 2"
+    }
+    ButtonWidgetClass BtnSpawnCUSTOM7 {
+     visible 1
+     clipchildren 1
+     position 0.75928 0.17012
+     size 0.04681 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Spawn 5"
+    }
+    ButtonWidgetClass BtnSpawnCUSTOM8 {
+     visible 1
+     clipchildren 1
+     position 0.81277 0.17012
+     size 0.04681 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Spawn 6"
+    }
+    ButtonWidgetClass BtnSpawnCUSTOM9 {
+     visible 1
+     clipchildren 1
+     position 0.86627 0.22936
+     size 0.05349 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Spawn 3"
+    }
+    TextListboxWidgetClass PlayersListBOX {
+     position 19.5282 143.57201
+     size 528.979 428.224
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     "highlight row" 0
+    }
+    PanelWidgetClass SwitchWidgetPlayer {
+     visible 1
+     ignorepointer 1
+     position 548.50598 93.1926
+     size 869.03802 881.633
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+     {
+      TextWidgetClass PlayerHealthTEXT {
+       ignorepointer 1
+       position 277.08499 163.729
+       size 403.03 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass PlayerNameTEXT {
+       ignorepointer 1
+       position 176.32501 88.1606
+       size 503.79001 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass PlayerViewTitleTEXT {
+       ignorepointer 1
+       position 176.32501 12.5921
+       size 503.79001 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Player Viewer"
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass PlayerPosXTEXT {
+       ignorepointer 1
+       position 226.70399 239.29799
+       size 453.41101 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass PlayerPosZTEXT {
+       ignorepointer 1
+       position 226.70399 302.27103
+       size 453.41101 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass PlayerPosYTEXT {
+       ignorepointer 1
+       position 226.70399 365.24503
+       size 453.41101 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass PlayerPosTITLE {
+       ignorepointer 1
+       position 176.32501 239.29799
+       size 50.379 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "X"
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass PlayerPosTITLE1 {
+       ignorepointer 1
+       position 176.32501 302.27103
+       size 50.379 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Z"
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass PlayerPosTITLE2 {
+       ignorepointer 1
+       position 176.32501 365.24503
+       size 50.379 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Y"
+       "text halign" center
+       "text valign" center
+      }
+      ButtonWidgetClass BtnKillPlayer {
+       visible 1
+       clipchildren 1
+       position 0.82608 0.03072
+       size 0.15158 0.08357
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Editor
+       text "KILL PLAYER"
+      }
+      ButtonWidgetClass BtnHealPlayer {
+       visible 1
+       clipchildren 1
+       position 0.65217 0.03072
+       size 0.15158 0.08357
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Editor
+       text "Heal Player"
+      }
+      ButtonWidgetClass BtnTPtoMe {
+       visible 1
+       clipchildren 1
+       position 0.23188 0.03072
+       size 0.15942 0.08357
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Editor
+       text "TP TO ME"
+      }
+      ButtonWidgetClass BtnTPtoPlayer {
+       visible 1
+       clipchildren 1
+       position 0.04348 0.03072
+       size 0.17391 0.08357
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Editor
+       text "TP TO"
+      }
+      ButtonWidgetClass BtnFreeze {
+       visible 1
+       clipchildren 1
+       position 0.4058 0.03072
+       size 0.15942 0.08357
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Editor
+       text "FREEZE"
+      }
+      TextWidgetClass PlayerHealthVIEW {
+       ignorepointer 1
+       position 176.32701 163.73199
+       size 100.758 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "HP"
+       "text halign" center
+       "text valign" center
+      }
+     }
+    }
+    ButtonWidgetClass BtnPlayerView {
+     visible 1
+     clipchildren 1
+     position 0.2979 0.91657
+     size 0.06687 0.04315
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Player"
+    }
+    ButtonWidgetClass BtnMapView {
+     visible 1
+     clipchildren 1
+     position 0.37145 0.91657
+     size 0.06687 0.04315
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Map"
+    }
+    ButtonWidgetClass BtnInfoView {
+     visible 1
+     clipchildren 1
+     position 0.445 0.91657
+     size 0.06687 0.04315
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Info"
+    }
+    PanelWidgetClass SwitchWidgetMap {
+     ignorepointer 1
+     position 548.50598 93.1926
+     size 869.03802 881.633
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+     {
+      MapWidgetClass MapWidget {
+       position 14.1671 12.5947
+       size 843.84796 856.44299
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+      }
+     }
+    }
+    PanelWidgetClass SwitchWidgetInfo {
+     ignorepointer 1
+     position 546.93408 93.1926
+     size 869.03802 881.633
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+    }
+    TextWidgetClass PlayersOnServerTEXT {
+     ignorepointer 1
+     position 6.93205 93.1926
+     size 554.16895 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     "text halign" center
+     "text valign" center
+    }
+   }
+  }
+ }
+}
