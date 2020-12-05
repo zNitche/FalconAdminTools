@@ -22,7 +22,7 @@ class CfgMods
 	    credits = "";
 	    author = "";
 	    authorID = "0";
-	    version = "1.0";
+	    version = "0.3";
 	    extra = 0;
 	    type = "mod";
 
