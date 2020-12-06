@@ -60,35 +60,8 @@ class FalconUtils
 			return false;
 		}
 		else {
-			FalconUtils.logAction(null, "", "filemissing");
+			FalconLogger.logAdminFileMissing();
 			return false;
 		}
     }
-	
-	static void logAction(PlayerBase player, string command, string type) {
-		switch(type) {
-			case "filemissing": {
-				GetGame().AdminLog("[FalconTools] Can't find admins list. File missing");
-				break;
-			}
-			case "unauthorized": {
-				GetGame().AdminLog("[FalconTools] (" + type + " ) " + player.GetIdentity().GetName() + " (" +player.GetIdentity().GetPlainId()+ ", "+player.GetIdentity().GetId() + ") tried to execute admin command"); 
-				break;
-			}
-			
-			case "authorized": {
-				GetGame().AdminLog("[FalconTools] (" + type + " ) " + player.GetIdentity().GetName() + " (" +player.GetIdentity().GetPlainId()+ ", "+player.GetIdentity().GetId() + ") executed " + command); 	
-				break;
-			}
-			
-			case "debug": {
-				GetGame().AdminLog("[DEBUG] "  + command);
-				break;
-			}
-			
-			default: {
-				GetGame().AdminLog("[FalconTools] (" + type + " ) (" +player.GetIdentity().GetPlainId()+ ", "+player.GetIdentity().GetId() + ") default log"); 
-			}
-		}
-	}	
 }

@@ -44,9 +44,10 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-            Print( "Server Menu GM FalconToolsV2" );
-
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
+				
+				FalconLogger.logAction(sender.GetId(), "", "adminGM");
+				
 				player = getPlayer(sender);
 				
 				if (player.getHasGm()) {
@@ -70,8 +71,6 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-            Print( "Server Menu SelfHeal FalconToolsV2" );
-
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 				player = getPlayer(sender);
 				
@@ -91,7 +90,6 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-            Print( "Server Menu KYS FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 				player = getPlayer(sender);
@@ -112,7 +110,6 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-            Print( "Server Menu SAFE FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 				player = getPlayer(sender);
@@ -136,7 +133,6 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-            Print( "Server Menu ADMIN LOADOUT FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 				player = getPlayer(sender);
@@ -162,7 +158,6 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-            Print( "Server Menu CAR FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 				Car vehicle;
@@ -197,7 +192,6 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-            Print( "Server Menu CHANGE TIME FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 				string time = data.param1;
@@ -224,9 +218,8 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-            Print( "Server TP TO POS FalconToolsV2" );
-
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
+				FalconLogger.logAction(sender.GetId(), data.param1.ToString(), "adminTP");
 				player = getPlayer(sender);
 				player.SetPosition(data.param1);
 			}
@@ -244,9 +237,8 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-            Print( "Server SET POS FalconToolsV2" );
-
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
+				FalconLogger.logAction(sender.GetId(), data.param1.ToString(), "adminTP");
 				player = getPlayer(sender);
 				player.SetPosition(data.param1);
 			}
@@ -263,12 +255,13 @@ class FalconToolsV2
         if ( !ctx.Read( data ) ) return;
         
         if( type == CallType.Server ) {
-            Print( "Server SPAWN ITEM FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 				player = getPlayer(sender);
 				
 				GetGame().CreateObject(data.param1, player.GetPosition(), false, true );
+				
+				FalconLogger.logAction(sender.GetId(), data.param1, "adminSpawnedItem");
 			}
         }
     }
@@ -283,7 +276,6 @@ class FalconToolsV2
         if ( !ctx.Read( data ) ) return;
         
         if( type == CallType.Server ) {
-           	 Print( "Server GET TARGET PLAYER FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 						
@@ -314,7 +306,6 @@ class FalconToolsV2
         if ( !ctx.Read( data ) ) return;
         
         if( type == CallType.Server ) {
-           	 Print( "Server TP TARGET TO ME FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 						
@@ -341,7 +332,6 @@ class FalconToolsV2
         if ( !ctx.Read( data ) ) return;
         
         if( type == CallType.Server ) {
-           	 Print( "Server FREEZE TARGET PLAYER FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 						
@@ -376,7 +366,6 @@ class FalconToolsV2
         if ( !ctx.Read( data ) ) return;
         
         if( type == CallType.Server ) {
-           	 Print( "Server TP TO PLAYER FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 						
@@ -388,6 +377,8 @@ class FalconToolsV2
 					PlayerBase player = getPlayer(sender);
 
 					player.SetPosition(targetP.GetPosition());
+					
+					FalconLogger.logAction(sender.GetId(), targetP.GetPosition().ToString(), "adminTP");
 				}
 			}
        	 }
@@ -403,7 +394,6 @@ class FalconToolsV2
         if ( !ctx.Read( data ) ) return;
         
         if( type == CallType.Server ) {
-           	 Print( "Server HEAL TARGET PLAYER FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 						
@@ -428,7 +418,6 @@ class FalconToolsV2
         if ( !ctx.Read( data ) ) return;
         
         if( type == CallType.Server ) {
-           	 Print( "Server KILL TARGET PLAYER FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 						
@@ -438,6 +427,8 @@ class FalconToolsV2
 				else {
 					PlayerBase targetP = FalconUtils.GetPlayerByName(data.param1);
 					targetP.SetHealth(0);
+					
+					FalconLogger.logAction(sender.GetId(), targetP.GetIdentity().GetName(), "adminKillPlayer");
 				}
 			}
        	 }
@@ -453,7 +444,6 @@ class FalconToolsV2
         if ( !ctx.Read( data ) ) return;
         
         if( type == CallType.Server ) {
-           	 Print( "Server SET PLAYERS LIST FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 				array<Man> players = new array<Man>;
@@ -481,7 +471,6 @@ class FalconToolsV2
         if ( !ctx.Read( data ) ) return;
         
         if( type == CallType.Server ) {
-           	 Print( "Server PLAYERS ON SERVER FalconToolsV2" );
 
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
 				array<Man> players = new array<Man>;

@@ -21,7 +21,7 @@ class FalconMonitor extends UIScriptedMenu
 	private EditBoxWidget spawnerBox;
 	
 	private TextListboxWidget playersWidget;
-	private TextWidget PlayersOnServerText;
+	private TextWidget playersOnServerText;
 	
 	///Player View
 	private Widget switchWidgetPlayer;
@@ -111,7 +111,7 @@ class FalconMonitor extends UIScriptedMenu
 			btnSpawn = ButtonWidget.Cast( widgetRoot.FindAnyWidget( "BtnSpawn" ));
 			
 			playersWidget = TextListboxWidget.Cast(widgetRoot.FindAnyWidget("PlayersListBOX"));
-			PlayersOnServerText = TextWidget.Cast(widgetRoot.FindAnyWidget("PlayersOnServerTEXT"));
+			playersOnServerText = TextWidget.Cast(widgetRoot.FindAnyWidget("PlayersOnServerText"));
 			
 			///Player Viewer
 			switchWidgetPlayer = Widget.Cast(widgetRoot.FindAnyWidget("SwitchWidgetPlayer"));
@@ -313,9 +313,7 @@ class FalconMonitor extends UIScriptedMenu
 				
 				foreach (string playerName : playersNames) {
 					playersWidget.AddItem(playerName, NULL, 0);
-					Print("Player " + playerName);
 				}
-				Print("Players on server " + playersNames.Count());
 			}
 		}
 	}
@@ -459,7 +457,7 @@ class FalconMonitor extends UIScriptedMenu
 			{
 				int playersCount = data.param1;
 				
-				PlayersOnServerText.SetText("Players: " + playersCount.ToString());
+				playersOnServerText.SetText("Players: " + playersCount.ToString());
 			}
 		}
 	}
