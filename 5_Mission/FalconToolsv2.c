@@ -39,7 +39,7 @@ class FalconToolsV2
 	
 	private void turnGMS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
     {
-        Param1< PlayerBase > data;
+        Param1< string > data;
         if ( !ctx.Read( data ) ) return;
         
 		
@@ -50,23 +50,18 @@ class FalconToolsV2
 				
 				player = getPlayer(sender);
 				
-				if (player.getHasGm()) {
-					player.setHasGm(false);
-				}
-				else {
-					player.setHasGm(true);
-				}
+				player.setHasGm(!player.getHasGm());
 			}
         }
     }
 	
-	void turnGM(PlayerBase player) {
-		GetRPCManager().SendRPC( "Falcon", "turnGMS", new Param1<PlayerBase>(player) );
+	void turnGM() {
+		GetRPCManager().SendRPC( "Falcon", "turnGMS", new Param1<string>("") );
 	}
 	
 	private void healS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
     {
-        Param1< PlayerBase > data;
+        Param1< string > data;
         if ( !ctx.Read( data ) ) return;
         
 		
@@ -79,13 +74,13 @@ class FalconToolsV2
         }
     }
 	
-	void selfHeal(PlayerBase player) {
-		GetRPCManager().SendRPC( "Falcon", "healS", new Param1<PlayerBase>(player) );
+	void selfHeal() {
+		GetRPCManager().SendRPC( "Falcon", "healS", new Param1<string>("") );
 	}
 	
 	private void kysS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
     {
-        Param1< PlayerBase > data;
+        Param1< string > data;
         if ( !ctx.Read( data ) ) return;
         
 		
@@ -99,13 +94,13 @@ class FalconToolsV2
         }
     }
 	
-	void kys(PlayerBase player) {
-		GetRPCManager().SendRPC( "Falcon", "kysS", new Param1<PlayerBase>(player) );
+	void kys() {
+		GetRPCManager().SendRPC( "Falcon", "kysS", new Param1<string>("") );
 	}
 	
 	private void safeS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
     {
-        Param1< PlayerBase > data;
+        Param1< string > data;
         if ( !ctx.Read( data ) ) return;
         
 		
@@ -122,13 +117,13 @@ class FalconToolsV2
         }
     }
 	
-	void safe(PlayerBase player) {
-		GetRPCManager().SendRPC( "Falcon", "safeS", new Param1<PlayerBase>(player) );
+	void safe() {
+		GetRPCManager().SendRPC( "Falcon", "safeS", new Param1<string>("") );
 	}
 	
 	private void admS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
     {
-        Param1< PlayerBase > data;
+        Param1< string > data;
         if ( !ctx.Read( data ) ) return;
         
 		
@@ -147,13 +142,13 @@ class FalconToolsV2
         }
     }
 	
-	void adm(PlayerBase player) {
-		GetRPCManager().SendRPC( "Falcon", "admS", new Param1<PlayerBase>(player) );
+	void adm() {
+		GetRPCManager().SendRPC( "Falcon", "admS", new Param1<string>("") );
 	}
 	
 	private void carS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
     {
-        Param1< PlayerBase > data;
+        Param1< string > data;
         if ( !ctx.Read( data ) ) return;
         
 		
@@ -181,8 +176,8 @@ class FalconToolsV2
         }
     }
 	
-	void car(PlayerBase player) {
-		GetRPCManager().SendRPC( "Falcon", "carS", new Param1<PlayerBase>(player) );
+	void car() {
+		GetRPCManager().SendRPC( "Falcon", "carS", new Param1<string>("") );
 	}
 	
 	private void changeTimeS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -493,8 +488,8 @@ class FalconToolsV2
 		player.SetHealth(player.GetMaxHealth("", ""));
 		player.SetHealth("", "Blood", player.GetMaxHealth("", "Blood"));
 		player.GetStatStamina().Set(1000);
-		player.GetStatEnergy().Set(1000);
-		player.GetStatWater().Set(1000);
+		player.GetStatEnergy().Set(player.GetStatWater().GetMax());
+		player.GetStatWater().Set(player.GetStatWater().GetMax());
 	}
 	///
 }

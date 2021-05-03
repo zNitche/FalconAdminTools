@@ -54,7 +54,7 @@ class FalconMonitor extends UIScriptedMenu
 	
 	private PlayerBase player;
 	
-	private string t;
+	private string gmValue;
 	
 	ref FalconToolsV2 FalconToolsv2;
 			
@@ -172,7 +172,6 @@ class FalconMonitor extends UIScriptedMenu
 		setPlayersList();
 		setPlayersOnServer();
 		
-		
 		hidePlayerViewer();
 		hideMapViewer();
 		
@@ -213,11 +212,14 @@ class FalconMonitor extends UIScriptedMenu
     }
 	
 	private void setPosition() {
-		vector pos = player.GetPosition();
+		if (player != null)
+		{
+			vector pos = player.GetPosition();
 		
-		setPositionBoxX.SetText(pos[0].ToString());
-		setPositionBoxZ.SetText(pos[1].ToString());
-		setPositionBoxY.SetText(pos[2].ToString());
+			setPositionBoxX.SetText(pos[0].ToString());
+			setPositionBoxZ.SetText(pos[1].ToString());
+			setPositionBoxY.SetText(pos[2].ToString());
+		}
 	}
 	
 	private void setTime() {
@@ -230,14 +232,19 @@ class FalconMonitor extends UIScriptedMenu
 	}
 	
 	private void setGM() {
-		if (player.getHasGm()) {
-			t = "GM ON";
-		}
-		else {
-			t = "GM OFF";
-		}
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
 		
-		gmContent.SetText(t);
+		if (player != null)
+		{
+			if (player.getHasGm()) {
+				gmValue = "GM ON";
+			}
+			else {
+				gmValue = "GM OFF";
+			}
+			
+			gmContent.SetText(gmValue);
+		}
 	}
 	
 	void setPlayer(PlayerBase player) {
@@ -245,17 +252,13 @@ class FalconMonitor extends UIScriptedMenu
 	}
 	
 	void setGodMode() {
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
 		
-		if (player.getHasGm()) {
-			
-			player.setHasGm(false);
-			FalconToolsv2.turnGM(PlayerBase.Cast(GetGame().GetPlayer()));
+		if (player != null)
+		{
+			player.setHasGm(!player.getHasGm());
+			FalconToolsv2.turnGM();	
 		}
-		
-		else {
-			player.setHasGm(true);
-			FalconToolsv2.turnGM(PlayerBase.Cast(GetGame().GetPlayer()));
-		}		
 	}
 	
 	void applyWorld() {
@@ -265,22 +268,22 @@ class FalconMonitor extends UIScriptedMenu
 	}
 	
 	void healPlayer() {
-		FalconToolsv2.selfHeal(PlayerBase.Cast(GetGame().GetPlayer()));
+		FalconToolsv2.selfHeal();
 	}
 	
 	void kys() {
-		FalconToolsv2.kys(PlayerBase.Cast(GetGame().GetPlayer()));
+		FalconToolsv2.kys();
 	}
 	void takeMeHome() {
-		FalconToolsv2.safe(PlayerBase.Cast(GetGame().GetPlayer()));
+		FalconToolsv2.safe();
 	}
 	
 	void getAdmLoadout() {
-		FalconToolsv2.adm(PlayerBase.Cast(GetGame().GetPlayer()));
+		FalconToolsv2.adm();
 	}
 	
 	void getCar() {
-		FalconToolsv2.car(PlayerBase.Cast(GetGame().GetPlayer()));
+		FalconToolsv2.car();
 	}
 	
 	void applyPosition() {

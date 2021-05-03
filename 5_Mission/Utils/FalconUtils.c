@@ -1,5 +1,7 @@
 class FalconUtils 
 {
+	const static string adminsJson = "$profile:/FT/admins.json"; 
+	
 	///Left for compatibility
 	static PlayerBase GetPlayer(string id, array<Man> players) {
 		
@@ -48,9 +50,9 @@ class FalconUtils
 	static bool IsPlayerAnAdmin(string userID) {
         map<string, string> adminGuids = new map<string, string>();
 		
-		if (FileExist("$profile:/FT/admins.json")) {
+		if (FileExist(adminsJson)) {
 			
-			JsonFileLoader<map<string, string>>.JsonLoadFile("$profile:/FT/admins.json", adminGuids);
+			JsonFileLoader<map<string, string>>.JsonLoadFile(adminsJson, adminGuids);
 					
 			foreach (string guid : adminGuids) {
 				if (guid == userID) {

@@ -19,4 +19,24 @@ modded class PlayerBase
 	void setIsFreezed(bool state) {
 		isFreezed = state;
 	}
+	
+	override void OnConnect()
+	{
+		super.OnConnect();
+		
+		Man thisMan = this;
+		
+		FalconPlayerTelemetryLogger.logPlayer(thisMan.GetIdentity().GetName(), thisMan.GetIdentity().GetId());
+	}
+	
+	override void OnDisconnect() 
+	{
+		// Gives NullPointer Exception, IDK why
+		Man thisMan = this;
+		
+		FalconPlayerTelemetryLogger.logPlayerLogoutLocation(thisMan.GetIdentity().GetId(), thisMan.GetPosition().ToString());
+		FalconPlayerTelemetryLogger.logPlayerLogoutHealth(thisMan.GetIdentity().GetId(), thisMan.GetHealth().ToString());
+		
+		super.OnDisconnect();
+	}
 }
