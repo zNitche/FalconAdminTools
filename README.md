@@ -20,6 +20,7 @@ Admin GUI tool for unreleased `FalconModPack` for `DayZ 1.11`
 - Spawn cars
 - Tp to predefined safe point
 - Turn On/Off Godmode
+- Simple Player telemetry (logging health, position)
 
 ### Key Bindings
 - `Numlock` Turn On/Off Admn Panel
