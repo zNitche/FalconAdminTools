@@ -1,4 +1,3 @@
-//TODO: Yeah some functions (almost all of them) take PlayerBase as arg. Decide what to do with it.
 class FalconToolsV2
 {
 	private PlayerBase player;

@@ -1,7 +1,7 @@
 modded class PlayerBase
 {
-	private bool hasGM;
-	private bool isFreezed;
+	private bool hasGM = false;
+	private bool isFreezed = false;
 	
 	bool getHasGm() {
 		return hasGM;

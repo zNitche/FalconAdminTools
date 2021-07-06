@@ -64,6 +64,35 @@ FrameWidgetClass rootFrame {
      "text halign" center
      "text valign" center
     }
+    TextWidgetClass HummanityLevelText {
+     ignorepointer 1
+     position 12.5948 182.491
+     size 283.67999 62.9738
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     fixaspect inside
+     text "Level"
+     "size to text h" 0
+     "size to text v" 0
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass HummanityLevelCountText {
+     ignorepointer 1
+     position 299.10901 182.491
+     size 289.67801 62.9738
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     fixaspect inside
+     "size to text h" 0
+     "size to text v" 0
+     "text halign" center
+     "text valign" center
+    }
    }
   }
  }

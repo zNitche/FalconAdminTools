@@ -6,6 +6,7 @@ modded class MissionGameplay {
 	ref FalconToolsV2 FalconToolsv2;
 	ref FalconMonitor AdminMonitor;
 	ref PlayerMonitor PlayerMonit;
+	ref PlayerMonitorBack MonitorBack;
 
 	private PlayerBase player;
 	private bool isFreeCamActive = false;
@@ -13,6 +14,7 @@ modded class MissionGameplay {
 	void MissionGameplay() {
 		auth = new ref FalconAuthenticator();
 		FalconToolsv2 = new ref FalconToolsV2();
+		MonitorBack = new ref PlayerMonitorBack();
 		
 		GetRPCManager().AddRPC( "Falcon", "OpenMenuC", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "Falcon", "ToggleFreecamC", this, SingeplayerExecutionType.Server );

@@ -6,15 +6,16 @@ class PlayerMonitor extends UIScriptedMenu
     private bool isMenuOpen;
 			
 	private TextWidget HummanityCountText;
+	private TextWidget HummanityLevelCountText;
+	
 	ref PlayerMonitorBack MonitorBack;
 	
 	//Constructor
 	void PlayerMonitor() {		
 		MonitorBack = new ref PlayerMonitorBack();
 		
-		Print("Init");
-		
-		GetRPCManager().AddRPC( "Falcon", "setHummC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "Falcon", "setHummanityC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "Falcon", "setHummanityLevelC", this, SingeplayerExecutionType.Server );
 	}
 	
 	//Deconstructor
@@ -39,11 +40,13 @@ class PlayerMonitor extends UIScriptedMenu
 			widgetRoot.Show(false);
 			
 			HummanityCountText = TextWidget.Cast( widgetRoot.FindAnyWidget("HummanityCountText") );
+			HummanityLevelCountText = TextWidget.Cast( widgetRoot.FindAnyWidget("HummanityLevelCountText") );
 		
 			isInitialized = true;
 		}
 			
-		setHumm();
+		setHummanity();
+		setHummanityLevel();
 		
 		return widgetRoot;		
 	}
@@ -76,7 +79,7 @@ class PlayerMonitor extends UIScriptedMenu
             PPEffects.SetBlurMenu(0);
     }
 	
-	void setHummC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) {
+	void setHummanityC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) {
 		
 		Param1<int> data;
         if ( !ctx.Read(data)) return;
@@ -91,9 +94,27 @@ class PlayerMonitor extends UIScriptedMenu
 		}
 	}
 	
-	void setHumm() {
-		Print("Intit set hum");
+	void setHummanity() {
 		MonitorBack.setPlayerHummanity();
+	}
+	
+	void setHummanityLevelC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) {
+		
+		Param1<string> data;
+        if ( !ctx.Read(data)) return;
+		
+		if (type == CallType.Client)
+        {
+			if (data.param1)
+			{
+				string hummanityLevel = data.param1;
+				HummanityLevelCountText.SetText(hummanityLevel);
+			}
+		}
+	}
+	
+	void setHummanityLevel() {
+		MonitorBack.setPlayerHummanityLevel();
 	}
 }
 	
