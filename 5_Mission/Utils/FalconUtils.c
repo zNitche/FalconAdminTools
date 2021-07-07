@@ -48,11 +48,11 @@ class FalconUtils
 	}	
 	
 	static bool IsPlayerAnAdmin(string userID) {
-        map<string, string> adminGuids = new map<string, string>();
+        array<string> adminGuids = new array<string>();
 		
 		if (FileExist(adminsJson)) {
 			
-			JsonFileLoader<map<string, string>>.JsonLoadFile(adminsJson, adminGuids);
+			JsonFileLoader<array<string>>.JsonLoadFile(adminsJson, adminGuids);
 					
 			foreach (string guid : adminGuids) {
 				if (guid == userID) {

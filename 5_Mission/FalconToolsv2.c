@@ -220,10 +220,6 @@ class FalconToolsV2
         }
     }
 	
-	void tpToPos(vector pos) {
-		GetRPCManager().SendRPC( "Falcon", "tpToPosS", new Param1<vector>(pos) );
-	}
-	
 	private void setPosS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
     {
         Param1< vector > data;

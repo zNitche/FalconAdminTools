@@ -8,10 +8,6 @@ modded class MissionBase {
                 	menu = new FalconMonitor;
                 	break;
 				}
-				case 2138598: {
-					menu = new PlayerMonitor;
-					break;
-				}
             }
             if (menu) {
                 menu.SetID(id);

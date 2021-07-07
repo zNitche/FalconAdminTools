@@ -5,8 +5,6 @@ modded class MissionGameplay {
 	ref FalconAuthenticator auth;
 	ref FalconToolsV2 FalconToolsv2;
 	ref FalconMonitor AdminMonitor;
-	ref PlayerMonitor PlayerMonit;
-	ref PlayerMonitorBack MonitorBack;
 
 	private PlayerBase player;
 	private bool isFreeCamActive = false;
@@ -14,7 +12,6 @@ modded class MissionGameplay {
 	void MissionGameplay() {
 		auth = new ref FalconAuthenticator();
 		FalconToolsv2 = new ref FalconToolsV2();
-		MonitorBack = new ref PlayerMonitorBack();
 		
 		GetRPCManager().AddRPC( "Falcon", "OpenMenuC", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "Falcon", "ToggleFreecamC", this, SingeplayerExecutionType.Server );
@@ -33,32 +30,7 @@ modded class MissionGameplay {
         }
 		
 		else if (key == KeyCode.KC_T) {
-			vector from = GetGame().GetCurrentCameraPosition();
-			vector to = from + (GetGame().GetCurrentCameraDirection() * 9999);
-			vector contact_pos;
-					
-			DayZPhysics.RaycastRV( from, to, contact_pos, NULL, NULL, NULL , NULL, NULL, false, false, ObjIntersectIFire);
-			
-			FalconToolsv2.tpToPos(contact_pos);
-		}
-		
-		else if (key == KeyCode.KC_M) {
-			if ( PlayerMonit ) {
-                	if (PlayerMonit.isMenuOpened()) {
-                    	PlayerMonit.setMenuOpened(false);
-                    	GetGame().GetUIManager().HideScriptedMenu(PlayerMonit);
-                    	UnlockControls();
-                	} else if (GetGame().GetUIManager().GetMenu() == NULL) {
-                    	GetGame().GetUIManager().ShowScriptedMenu(PlayerMonit, NULL);
-                    	PlayerMonit.setMenuOpened(true);
-					
-                    	LockControls();
-               	 	}
-            } else if (GetGame().GetUIManager().GetMenu() == NULL && PlayerMonit == null) {
-                LockControls();
-                PlayerMonit = PlayerMonitor.Cast(GetUIManager().EnterScriptedMenu(2138598, null));
-                PlayerMonit.setMenuOpened(true);
-            }
+			auth.verifyTpToPos(PlayerBase.Cast(GetGame().GetPlayer()).GetIdentity().ToString());
 		}
     }
 	
