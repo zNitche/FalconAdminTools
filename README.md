@@ -26,4 +26,3 @@ Admin GUI tool for unreleased `FalconModPack` for `DayZ 1.11`
 - `Numlock` Turn On/Off Admn Panel
 - `T` Tp to crosshair
 - `+` Turn On/Off freecam
-- `M` Turn On/Off player Monitor (works with `FalconHeroes`)
