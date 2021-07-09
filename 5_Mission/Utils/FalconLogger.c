@@ -37,7 +37,7 @@ class FalconLogger
 			}
 			
 			default: {
-				GetGame().AdminLog("[FalconTools] (" + type + " ) (" + playerID + ") default log"); 
+				GetGame().AdminLog("[FalconTools] (" + type + " ) (" + playerID + ") " + info); 
 			}
 		}
 	}	

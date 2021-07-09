@@ -77,20 +77,23 @@ modded class MissionGameplay {
 			{
 				player = PlayerBase.Cast(GetGame().GetPlayer());
 				
-				HumanInputController hic = player.GetInputController();
+				if (player.getAreBindsOn())
+				{
+					HumanInputController hic = player.GetInputController();
 				
-				if (hic) {
-					
-					if (isFreeCamActive) {
-						isFreeCamActive = false;
+					if (hic) {
+						
+						if (isFreeCamActive) {
+							isFreeCamActive = false;
+						}
+						else {
+							isFreeCamActive = true;
+						}
+						
+						hic.SetDisabled(isFreeCamActive);
 					}
-					else {
-						isFreeCamActive = true;
-					}
-					
-					hic.SetDisabled(isFreeCamActive);
+					DeveloperFreeCamera.FreeCameraToggle(player, false);	
 				}
-				DeveloperFreeCamera.FreeCameraToggle(player, false);
 			}
 		}
 	}

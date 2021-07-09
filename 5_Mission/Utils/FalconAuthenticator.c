@@ -26,7 +26,7 @@ class FalconAuthenticator
         
 		
         if( type == CallType.Server ) {
-			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {				
 				GetRPCManager().SendRPC( "Falcon", "ToggleFreecamC", new Param1<bool>(true), true, sender);
 			}
         }
@@ -47,6 +47,11 @@ class FalconAuthenticator
 				
 		DayZPhysics.RaycastRV( from, to, contact_pos, NULL, NULL, NULL , NULL, NULL, false, false, ObjIntersectIFire);
 		
-		GetRPCManager().SendRPC( "Falcon", "tpToPosS", new Param1<vector>(contact_pos) );
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		
+		if (player.getAreBindsOn())
+		{
+			GetRPCManager().SendRPC( "Falcon", "tpToPosS", new Param1<vector>(contact_pos) );
+		}
 	}
 }

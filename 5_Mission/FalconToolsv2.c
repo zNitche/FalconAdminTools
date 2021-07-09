@@ -54,8 +54,30 @@ class FalconToolsV2
         }
     }
 	
+	private void turnBindsOn( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
+    {
+        Param1< string > data;
+        if ( !ctx.Read( data ) ) return;
+        
+		
+        if( type == CallType.Server ) {
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
+				
+				FalconLogger.logAction(sender.GetId(), "", "bindsOn");
+				
+				player = getPlayer(sender);
+				
+				player.setAreBindsOn(!player.getAreBindsOn());
+			}
+        }
+    }
+	
 	void turnGM() {
 		GetRPCManager().SendRPC( "Falcon", "turnGMS", new Param1<string>("") );
+	}
+	
+	void turnBindsOn() {
+		GetRPCManager().SendRPC( "Falcon", "turnBindsOn", new Param1<string>("") );
 	}
 	
 	private void healS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )

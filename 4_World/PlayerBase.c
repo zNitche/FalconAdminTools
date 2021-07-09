@@ -2,6 +2,7 @@ modded class PlayerBase
 {
 	private bool hasGM = false;
 	private bool isFreezed = false;
+	private bool areBindsOn = false;
 	
 	bool getHasGm() {
 		return hasGM;
@@ -10,6 +11,14 @@ modded class PlayerBase
 	void setHasGm(bool state) {
 		hasGM = state;
 		SetAllowDamage(!state);
+	}
+	
+	bool getAreBindsOn() {
+		return areBindsOn;
+	}
+	
+	void setAreBindsOn(bool state) {
+		areBindsOn = state;
 	}
 	
 	bool getIsFreezed() {

@@ -3,11 +3,13 @@ class FalconMonitor extends UIScriptedMenu
 	private Widget widgetRoot;
 	
 	private TextWidget gmContent;
+	private TextWidget bindsContent;
 	
 	private ButtonWidget btnGM;
 	private ButtonWidget btnHeal;
 	private ButtonWidget btnKYS;
 	private ButtonWidget btnSafe;
+	private ButtonWidget btnBinds;
 	private ButtonWidget btnAdm;
 	private ButtonWidget btnCar;
 	private ButtonWidget btnApplyWorld;
@@ -55,6 +57,7 @@ class FalconMonitor extends UIScriptedMenu
 	private PlayerBase player;
 	
 	private string gmValue;
+	private string bindsValue;
 	
 	ref FalconToolsV2 FalconToolsv2;
 			
@@ -94,8 +97,10 @@ class FalconMonitor extends UIScriptedMenu
 			widgetRoot.Show(false);
 		
 			gmContent = TextWidget.Cast( widgetRoot.FindAnyWidget("GmCONTENT") );
+			bindsContent = TextWidget.Cast( widgetRoot.FindAnyWidget("BindsCONTENT") );
 			
 			btnGM = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnGM") );
+			btnBinds = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnBinds") );
 			btnHeal = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnHEAL") );
 			btnKYS = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnKYS") );
 			btnSafe = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnSAFE") );
@@ -138,6 +143,7 @@ class FalconMonitor extends UIScriptedMenu
 			///
 			
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnGM, this, "setGodMode" );
+			WidgetEventHandler.GetInstance().RegisterOnClick( btnBinds, this, "setBindsMode" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnHeal, this, "healPlayer" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnKYS, this, "kys" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnSafe, this, "takeMeHome" );
@@ -167,6 +173,7 @@ class FalconMonitor extends UIScriptedMenu
 		setPosition();
 		setTime();
 		setGM();
+		setBinds();
 		
 		playersWidget.ClearItems();
 		setPlayersList();
@@ -247,8 +254,34 @@ class FalconMonitor extends UIScriptedMenu
 		}
 	}
 	
+	private void setBinds() {
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		
+		if (player != null)
+		{
+			if (player.getAreBindsOn()) {
+				bindsValue = "Binds ON";
+			}
+			else {
+				bindsValue = "Binds OFF";
+			}
+			
+			bindsContent.SetText(bindsValue);
+		}
+	}
+	
 	void setPlayer(PlayerBase player) {
 		this.player = player;
+	}
+	
+	void setBindsMode() {
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		
+		if (player != null)
+		{
+			player.setAreBindsOn(!player.getAreBindsOn());
+			FalconToolsv2.turnBindsOn();	
+		}
 	}
 	
 	void setGodMode() {
