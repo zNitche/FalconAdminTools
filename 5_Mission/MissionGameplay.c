@@ -25,8 +25,26 @@ modded class MissionGameplay {
 			auth.verifyFreeCam(PlayerBase.Cast(GetGame().GetPlayer()).GetIdentity().ToString());
 		}
 		
-		else if (key == KeyCode.KC_NUMLOCK) {
-			auth.verifyAdminPanel(PlayerBase.Cast(GetGame().GetPlayer()).GetIdentity().ToString());
+		else if (key == KeyCode.KC_NUMLOCK || key == KeyCode.KC_ESCAPE) {
+			if (AdminMonitor)
+			{
+				if (AdminMonitor.isMenuOpened())
+				{
+					closeAdminMonitor();
+				}
+				else if (key == KeyCode.KC_NUMLOCK && !AdminMonitor.isMenuOpened())
+				{
+					auth.verifyAdminPanel(PlayerBase.Cast(GetGame().GetPlayer()).GetIdentity().ToString());	
+				}
+			}
+			else
+			{
+				if (key == KeyCode.KC_NUMLOCK)
+				{
+					auth.verifyAdminPanel(PlayerBase.Cast(GetGame().GetPlayer()).GetIdentity().ToString());	
+				}
+			}
+			
         }
 		
 		else if (key == KeyCode.KC_T) {
@@ -45,16 +63,9 @@ modded class MissionGameplay {
 			{
 				if ( AdminMonitor ) {
                 	if (AdminMonitor.isMenuOpened()) {
-                    	AdminMonitor.setMenuOpened(false);
-                    	GetGame().GetUIManager().HideScriptedMenu(AdminMonitor);
-                    	UnlockControls();
+                    	closeAdminMonitor();
                 	} else if (GetGame().GetUIManager().GetMenu() == NULL) {
-                    	GetGame().GetUIManager().ShowScriptedMenu(AdminMonitor, NULL);
-                    	AdminMonitor.setMenuOpened(true);
-	
-						AdminMonitor.setPlayer(PlayerBase.Cast(PlayerBase.Cast(GetGame().GetPlayer())));
-					
-                    	LockControls();
+                    	openAdminMonitor();
                	 	}
             	} else if (GetGame().GetUIManager().GetMenu() == NULL && AdminMonitor == null) {
                 	LockControls();
@@ -96,6 +107,22 @@ modded class MissionGameplay {
 				}
 			}
 		}
+	}
+	
+	private void closeAdminMonitor() 
+	{
+		AdminMonitor.setMenuOpened(false);
+        GetGame().GetUIManager().HideScriptedMenu(AdminMonitor);
+        UnlockControls();
+	}
+	
+	private void openAdminMonitor()
+	{
+		GetGame().GetUIManager().ShowScriptedMenu(AdminMonitor, NULL);
+        AdminMonitor.setMenuOpened(true);
+		AdminMonitor.setPlayer(PlayerBase.Cast(PlayerBase.Cast(GetGame().GetPlayer())));
+
+        LockControls();
 	}
 	
 	
