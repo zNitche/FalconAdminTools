@@ -280,7 +280,6 @@ class FalconMonitor extends UIScriptedMenu
 		if (player != null)
 		{
 			player.setAreBindsOn(!player.getAreBindsOn());
-			FalconToolsv2.turnBindsOn();	
 		}
 	}
 	
