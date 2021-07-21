@@ -5,28 +5,28 @@ class FalconToolsV2
 	
 	void FalconToolsV2()
     {
-        GetRPCManager().AddRPC( "Falcon", "healS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "turnGMS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "kysS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "safeS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "admS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "carS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "changeTimeS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "tpToPosS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "setPosS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "spawnItemS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "getTargetPlayerS", this, SingeplayerExecutionType.Server );
+        GetRPCManager().AddRPC( "FalconTools", "healS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "turnGMS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "kysS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "safeS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "admS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "carS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "changeTimeS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "tpToPosS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "setPosS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "spawnItemS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "getTargetPlayerS", this, SingeplayerExecutionType.Server );
 		
 		///Player Viewer Commands
-		GetRPCManager().AddRPC( "Falcon", "tpToTargetS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "freezeTargetS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "tpToMeS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "healTargetS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "killTargetS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "tpToTargetS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "freezeTargetS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "tpToMeS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "healTargetS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "killTargetS", this, SingeplayerExecutionType.Server );
 		///
 		
-		GetRPCManager().AddRPC( "Falcon", "setPlayersListS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "setPlayersOnServerS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "setPlayersListS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "setPlayersOnServerS", this, SingeplayerExecutionType.Server );
     }
 	
 	private PlayerBase getPlayer(PlayerIdentity sender) {
@@ -55,7 +55,7 @@ class FalconToolsV2
     }
 	
 	void turnGM() {
-		GetRPCManager().SendRPC( "Falcon", "turnGMS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconTools", "turnGMS", new Param1<string>("") );
 	}
 	
 	private void healS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -74,7 +74,7 @@ class FalconToolsV2
     }
 	
 	void selfHeal() {
-		GetRPCManager().SendRPC( "Falcon", "healS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconTools", "healS", new Param1<string>("") );
 	}
 	
 	private void kysS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -94,7 +94,7 @@ class FalconToolsV2
     }
 	
 	void kys() {
-		GetRPCManager().SendRPC( "Falcon", "kysS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconTools", "kysS", new Param1<string>("") );
 	}
 	
 	private void safeS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -117,7 +117,7 @@ class FalconToolsV2
     }
 	
 	void safe() {
-		GetRPCManager().SendRPC( "Falcon", "safeS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconTools", "safeS", new Param1<string>("") );
 	}
 	
 	private void admS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -142,7 +142,7 @@ class FalconToolsV2
     }
 	
 	void adm() {
-		GetRPCManager().SendRPC( "Falcon", "admS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconTools", "admS", new Param1<string>("") );
 	}
 	
 	private void carS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -176,7 +176,7 @@ class FalconToolsV2
     }
 	
 	void car() {
-		GetRPCManager().SendRPC( "Falcon", "carS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconTools", "carS", new Param1<string>("") );
 	}
 	
 	private void changeTimeS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -202,7 +202,7 @@ class FalconToolsV2
     }
 	
 	void changeTime(string time) {
-		GetRPCManager().SendRPC( "Falcon", "changeTimeS", new Param1<string>(time) );
+		GetRPCManager().SendRPC( "FalconTools", "changeTimeS", new Param1<string>(time) );
 	}
 	
 	private void tpToPosS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -236,7 +236,7 @@ class FalconToolsV2
     }
 	
 	void setPos(vector pos) {
-		GetRPCManager().SendRPC( "Falcon", "setPosS", new Param1<vector>(pos) );
+		GetRPCManager().SendRPC( "FalconTools", "setPosS", new Param1<vector>(pos) );
 	}
 	
 	private void spawnItemS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -257,7 +257,7 @@ class FalconToolsV2
     }
 	
 	void spawnItem(string item) {
-		GetRPCManager().SendRPC( "Falcon", "spawnItemS", new Param1<string>(item) );
+		GetRPCManager().SendRPC( "FalconTools", "spawnItemS", new Param1<string>(item) );
 	}
 
 	private void getTargetPlayerS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -277,16 +277,16 @@ class FalconToolsV2
 					
 					string targetPName = targetP.GetIdentity().GetName();
 					
-					GetRPCManager().SendRPC("Falcon", "getTargetPlayerC", new Param1<string>(targetPName));
-					GetRPCManager().SendRPC("Falcon", "getTargetPlayerHealthC", new Param1<string>(targetP.GetHealth().ToString()));
-					GetRPCManager().SendRPC("Falcon", "getTargetPlayerPosC", new Param1<vector>(targetP.GetPosition()));
+					GetRPCManager().SendRPC("FalconTools", "getTargetPlayerC", new Param1<string>(targetPName));
+					GetRPCManager().SendRPC("FalconTools", "getTargetPlayerHealthC", new Param1<string>(targetP.GetHealth().ToString()));
+					GetRPCManager().SendRPC("FalconTools", "getTargetPlayerPosC", new Param1<vector>(targetP.GetPosition()));
 				}
 			}
        	 }
     }
 	
 	void getTargetPlayer(string targetPlayer) {	
-		GetRPCManager().SendRPC( "Falcon", "getTargetPlayerS", new Param1<string>(targetPlayer) );
+		GetRPCManager().SendRPC( "FalconTools", "getTargetPlayerS", new Param1<string>(targetPlayer) );
 	}
 	
 	///Player Viewer
@@ -313,7 +313,7 @@ class FalconToolsV2
     }
 	
 	void tpToMe(string targetPlayer) {	
-		GetRPCManager().SendRPC( "Falcon", "tpToMeS", new Param1<string>(targetPlayer) );
+		GetRPCManager().SendRPC( "FalconTools", "tpToMeS", new Param1<string>(targetPlayer) );
 	}
 	
 	private void freezeTargetS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -347,7 +347,7 @@ class FalconToolsV2
     }
 	
 	void freezeTarget(string targetPlayer) {	
-		GetRPCManager().SendRPC( "Falcon", "freezeTargetS", new Param1<string>(targetPlayer) );
+		GetRPCManager().SendRPC( "FalconTools", "freezeTargetS", new Param1<string>(targetPlayer) );
 	}
 	
 	private void tpToTargetS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -375,7 +375,7 @@ class FalconToolsV2
     }
 	
 	void tpToTarget(string targetPlayer) {	
-		GetRPCManager().SendRPC( "Falcon", "tpToTargetS", new Param1<string>(targetPlayer) );
+		GetRPCManager().SendRPC( "FalconTools", "tpToTargetS", new Param1<string>(targetPlayer) );
 	}
 	
 	private void healTargetS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -399,7 +399,7 @@ class FalconToolsV2
     }
 	
 	void healTarget(string targetPlayer) {	
-		GetRPCManager().SendRPC( "Falcon", "healTargetS", new Param1<string>(targetPlayer) );
+		GetRPCManager().SendRPC( "FalconTools", "healTargetS", new Param1<string>(targetPlayer) );
 	}
 	
 	private void killTargetS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -425,7 +425,7 @@ class FalconToolsV2
     }
 	
 	void killTarget(string targetPlayer) {	
-		GetRPCManager().SendRPC( "Falcon", "killTargetS", new Param1<string>(targetPlayer) );
+		GetRPCManager().SendRPC( "FalconTools", "killTargetS", new Param1<string>(targetPlayer) );
 	}
 	
 	private void setPlayersListS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -445,13 +445,13 @@ class FalconToolsV2
 				foreach (Man player: players) {
 					playersNames.Insert(player.GetIdentity().GetName());
 				}	
-				GetRPCManager().SendRPC( "Falcon", "setPlayersListC", new Param1<array<string>>(playersNames) );
+				GetRPCManager().SendRPC( "FalconTools", "setPlayersListC", new Param1<array<string>>(playersNames) );
 			}
        	 }
     }
 	
 	void setPlayersList() {	
-		GetRPCManager().SendRPC( "Falcon", "setPlayersListS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconTools", "setPlayersListS", new Param1<string>("") );
 	}
 	///Player Viewer
 	
@@ -469,13 +469,13 @@ class FalconToolsV2
 				
 				int playersCount = players.Count();
 				
-				GetRPCManager().SendRPC( "Falcon", "setPlayersOnServerC", new Param1<int>(playersCount) );
+				GetRPCManager().SendRPC( "FalconTools", "setPlayersOnServerC", new Param1<int>(playersCount) );
 			}
        	 }
     }
 	
 	void setPlayersOnServer() {	
-		GetRPCManager().SendRPC( "Falcon", "setPlayersOnServerS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconTools", "setPlayersOnServerS", new Param1<string>("") );
 	}
 	
 	///TODO: Move utils to another file ?

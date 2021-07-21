@@ -67,12 +67,12 @@ class FalconMonitor extends UIScriptedMenu
 		FalconToolsv2 = new ref FalconToolsV2();
 		
 		///Player Viewer Commands
-		GetRPCManager().AddRPC( "Falcon", "getTargetPlayerC", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "getTargetPlayerHealthC", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "getTargetPlayerPosC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "getTargetPlayerC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "getTargetPlayerHealthC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "getTargetPlayerPosC", this, SingeplayerExecutionType.Server );
 		///
-		GetRPCManager().AddRPC( "Falcon", "setPlayersListC", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "setPlayersOnServerC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "setPlayersListC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "setPlayersOnServerC", this, SingeplayerExecutionType.Server );
 	}
 	
 	//Deconstructor

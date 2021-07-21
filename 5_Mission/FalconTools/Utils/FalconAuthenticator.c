@@ -2,8 +2,8 @@ class FalconAuthenticator
 {
     void FalconAuthenticator()
     {
-        GetRPCManager().AddRPC( "Falcon", "OpenMenuS", this, SingeplayerExecutionType.Client );
-		GetRPCManager().AddRPC( "Falcon", "ToggleFreecamS", this, SingeplayerExecutionType.Client );
+        GetRPCManager().AddRPC( "FalconTools", "OpenMenuS", this, SingeplayerExecutionType.Client );
+		GetRPCManager().AddRPC( "FalconTools", "ToggleFreecamS", this, SingeplayerExecutionType.Client );
     }
 
 	private void OpenMenuS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -14,7 +14,7 @@ class FalconAuthenticator
 		
         if( type == CallType.Server ) {
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
-				GetRPCManager().SendRPC( "Falcon", "OpenMenuC", new Param1<bool>(true), true, sender);
+				GetRPCManager().SendRPC( "FalconTools", "OpenMenuC", new Param1<bool>(true), true, sender);
 			}
         }
     }
@@ -27,17 +27,17 @@ class FalconAuthenticator
 		
         if( type == CallType.Server ) {
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {				
-				GetRPCManager().SendRPC( "Falcon", "ToggleFreecamC", new Param1<bool>(true), true, sender);
+				GetRPCManager().SendRPC( "FalconTools", "ToggleFreecamC", new Param1<bool>(true), true, sender);
 			}
         }
     }
 
     void verifyAdminPanel(string guid) {
-		GetRPCManager().SendRPC( "Falcon", "OpenMenuS", new Param1< string >( guid ) );
+		GetRPCManager().SendRPC( "FalconTools", "OpenMenuS", new Param1< string >( guid ) );
 	}
 	
 	void verifyFreeCam(string guid) {
-		GetRPCManager().SendRPC( "Falcon", "ToggleFreecamS", new Param1< string >( guid ) );
+		GetRPCManager().SendRPC( "FalconTools", "ToggleFreecamS", new Param1< string >( guid ) );
 	}
 	
 	void verifyTpToPos(string guid) {
@@ -51,7 +51,7 @@ class FalconAuthenticator
 		
 		if (player.getAreBindsOn())
 		{
-			GetRPCManager().SendRPC( "Falcon", "tpToPosS", new Param1<vector>(contact_pos) );
+			GetRPCManager().SendRPC( "FalconTools", "tpToPosS", new Param1<vector>(contact_pos) );
 		}
 	}
 }

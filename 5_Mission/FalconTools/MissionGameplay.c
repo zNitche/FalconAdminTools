@@ -13,8 +13,8 @@ modded class MissionGameplay {
 		auth = new ref FalconAuthenticator();
 		FalconToolsv2 = new ref FalconToolsV2();
 		
-		GetRPCManager().AddRPC( "Falcon", "OpenMenuC", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "ToggleFreecamC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "OpenMenuC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "ToggleFreecamC", this, SingeplayerExecutionType.Server );
 	}
 
 	override void OnKeyPress(int key)
