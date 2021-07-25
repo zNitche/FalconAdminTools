@@ -9,7 +9,7 @@ modded class MissionGameplay {
 	private PlayerBase player;
 	private bool isFreeCamActive = false;
 	
-	void MissionGameplay() {
+	void MissionGameplay() {		
 		auth = new ref FalconAuthenticator();
 		FalconToolsv2 = new ref FalconToolsV2();
 		
@@ -68,7 +68,6 @@ modded class MissionGameplay {
                     	openAdminMonitor();
                	 	}
             	} else if (GetGame().GetUIManager().GetMenu() == NULL && AdminMonitor == null) {
-                	LockControls();
                 	AdminMonitor = FalconMonitor.Cast(GetUIManager().EnterScriptedMenu(2138597, null));
                 	AdminMonitor.setMenuOpened(true);
 				
@@ -113,7 +112,6 @@ modded class MissionGameplay {
 	{
 		AdminMonitor.setMenuOpened(false);
         GetGame().GetUIManager().HideScriptedMenu(AdminMonitor);
-        UnlockControls();
 	}
 	
 	private void openAdminMonitor()
@@ -121,24 +119,5 @@ modded class MissionGameplay {
 		GetGame().GetUIManager().ShowScriptedMenu(AdminMonitor, NULL);
         AdminMonitor.setMenuOpened(true);
 		AdminMonitor.setPlayer(PlayerBase.Cast(PlayerBase.Cast(GetGame().GetPlayer())));
-
-        LockControls();
 	}
-	
-	
-	//To avoid strange situations when closing menu
-	 private void LockControls()
-    {
-        GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_ALL);
-        GetGame().GetUIManager().ShowUICursor( true );
-        GetGame().GetMission().GetHud().Show( false );
-    }
-
-    private void UnlockControls()
-    {
-        GetGame().GetMission().PlayerControlEnable(false);
-        GetGame().GetInput().ResetGameFocus();
-        GetGame().GetUIManager().ShowUICursor( false );
-        GetGame().GetMission().GetHud().Show( true );
-    }
 }
