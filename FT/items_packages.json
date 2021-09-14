@@ -1,0 +1,76 @@
+[
+    {
+      "name": "Flag",
+      "items": [
+        {
+          "name": "TerritoryFlagKit",
+          "ammount": 1
+        },
+        {
+          "name": "WoodenLog",
+          "ammount": 10
+        },
+        {
+          "name": "Stone",
+          "ammount": 32
+        },
+        {
+          "name": "NailBox",
+          "ammount": 2
+        },
+        {
+          "name": "MetalWire",
+          "ammount": 1
+        },
+        {
+          "name": "Rope",
+          "ammount": 1
+        },
+        {
+          "name": "SledgeHammer",
+          "ammount": 1
+        },
+        {
+          "name": "Shovel",
+          "ammount": 1
+        },
+        {
+          "name": "Hammer",
+          "ammount": 1
+        },
+        {
+          "name": "Flag_Wolf",
+          "ammount": 1
+        }
+      ]
+    },
+    {
+      "name": "Fence",
+      "items": [
+        {
+          "name": "FenceKit",
+          "ammount": 1
+        },
+        {
+          "name": "WoodenLog",
+          "ammount": 2
+        },
+        {
+          "name": "WoodenPlank",
+          "ammount": 2
+        },
+        {
+          "name": "NailBox",
+          "ammount": 1
+        },
+        {
+          "name": "Shovel",
+          "ammount": 1
+        },
+        {
+          "name": "Hammer",
+          "ammount": 1
+        }
+      ]
+    }
+]

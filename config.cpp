@@ -20,7 +20,7 @@ class CfgMods
 	    hidePicture = 1;
 	    name = "FalconTools";
 	    credits = "";
-	    author = "zNitche";
+	    author = "";
 	    authorID = "0";
 	    version = "1.0";
 	    extra = 0;

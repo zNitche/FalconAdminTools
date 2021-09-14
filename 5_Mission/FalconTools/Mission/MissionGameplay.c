@@ -2,7 +2,6 @@
 
 modded class MissionGameplay {
 		
-	ref FalconAuthenticator auth;
 	ref FalconToolsV2 FalconToolsv2;
 	ref FalconMonitor AdminMonitor;
 
@@ -10,11 +9,11 @@ modded class MissionGameplay {
 	private bool isFreeCamActive = false;
 	
 	void MissionGameplay() {		
-		auth = new ref FalconAuthenticator();
 		FalconToolsv2 = new ref FalconToolsV2();
 		
 		GetRPCManager().AddRPC( "FalconTools", "OpenMenuC", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "FalconTools", "ToggleFreecamC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "messagePlayersC", this, SingeplayerExecutionType.Server );
 	}
 
 	override void OnKeyPress(int key)
@@ -22,7 +21,7 @@ modded class MissionGameplay {
         super.OnKeyPress(key);
 		
 		if (key == KeyCode.KC_ADD) {
-			auth.verifyFreeCam(PlayerBase.Cast(GetGame().GetPlayer()).GetIdentity().ToString());
+			FalconAuthenticator.verifyFreeCam();
 		}
 		
 		else if (key == KeyCode.KC_NUMLOCK || key == KeyCode.KC_ESCAPE) {
@@ -34,21 +33,25 @@ modded class MissionGameplay {
 				}
 				else if (key == KeyCode.KC_NUMLOCK && !AdminMonitor.isMenuOpened())
 				{
-					auth.verifyAdminPanel(PlayerBase.Cast(GetGame().GetPlayer()).GetIdentity().ToString());	
+					FalconAuthenticator.verifyAdminPanel();	
 				}
 			}
 			else
 			{
 				if (key == KeyCode.KC_NUMLOCK)
 				{
-					auth.verifyAdminPanel(PlayerBase.Cast(GetGame().GetPlayer()).GetIdentity().ToString());	
+					FalconAuthenticator.verifyAdminPanel();	
 				}
 			}
 			
         }
 		
 		else if (key == KeyCode.KC_T) {
-			auth.verifyTpToPos(PlayerBase.Cast(GetGame().GetPlayer()).GetIdentity().ToString());
+			FalconAuthenticator.verifyTpToPos();
+		}
+		
+		else if (key == KeyCode.KC_G) {
+			FalconAuthenticator.verifyDeleteObject();
 		}
     }
 	
@@ -70,8 +73,6 @@ modded class MissionGameplay {
             	} else if (GetGame().GetUIManager().GetMenu() == NULL && AdminMonitor == null) {
                 	AdminMonitor = FalconMonitor.Cast(GetUIManager().EnterScriptedMenu(2138597, null));
                 	AdminMonitor.setMenuOpened(true);
-				
-					AdminMonitor.setPlayer(PlayerBase.Cast(GetGame().GetPlayer()));
             	}
 			}
 		}
@@ -88,7 +89,7 @@ modded class MissionGameplay {
 				player = PlayerBase.Cast(GetGame().GetPlayer());
 				
 				if (player.getAreBindsOn())
-				{
+				{					
 					HumanInputController hic = player.GetInputController();
 				
 					if (hic) {
@@ -108,6 +109,19 @@ modded class MissionGameplay {
 		}
 	}
 	
+	private void messagePlayersC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) {
+		Param1<string> data;
+        if ( !ctx.Read(data)) return;
+		
+		if (type == CallType.Client)
+        {
+			if (data.param1)
+			{
+				GetGame().Chat(data.param1, "colorAction");
+			}
+		}
+	}
+	
 	private void closeAdminMonitor() 
 	{
 		AdminMonitor.setMenuOpened(false);
@@ -118,6 +132,5 @@ modded class MissionGameplay {
 	{
 		GetGame().GetUIManager().ShowScriptedMenu(AdminMonitor, NULL);
         AdminMonitor.setMenuOpened(true);
-		AdminMonitor.setPlayer(PlayerBase.Cast(PlayerBase.Cast(GetGame().GetPlayer())));
 	}
 }

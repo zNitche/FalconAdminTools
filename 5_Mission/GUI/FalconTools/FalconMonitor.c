@@ -14,50 +14,58 @@ class FalconMonitor extends UIScriptedMenu
 	private ButtonWidget btnCar;
 	private ButtonWidget btnApplyWorld;
 	private ButtonWidget btnApplyPosition;
-	private ButtonWidget btnSpawn;
+	private ButtonWidget btnSpawn;	
+	private ButtonWidget btnMessagePlayers;
+	
+	///Items Spawner
+	private TextListboxWidget spawnerPacksLIST;
+	private ButtonWidget btnSpawnPack;
+	///
 	
 	private EditBoxWidget worldTimeBox;
 	private EditBoxWidget setPositionBoxX;
 	private EditBoxWidget setPositionBoxZ;
 	private EditBoxWidget setPositionBoxY;
+	private EditBoxWidget messagePlayersInput;
 	private EditBoxWidget spawnerBox;
 	
 	private TextListboxWidget playersWidget;
 	private TextWidget playersOnServerTEXT;
 	
 	///Player View
-	private Widget switchWidgetPlayer;
+	private Widget playerWidget;
 	
 	private TextWidget targetPlayerName;
 	private TextWidget targetHealthText;
 	private TextWidget playerPosXText;
 	private TextWidget playerPosZText;
 	private TextWidget playerPosYText;
-	
-	private ButtonWidget btnPlayerView;
+	private TextWidget playerOrientationText;
+	private TextWidget playerIdentityTEXT;
 	
 	private ButtonWidget BtnTPtoPlayer;
 	private ButtonWidget BtnFreeze;
 	private ButtonWidget BtnTPtoMe;
 	private ButtonWidget BtnHealPlayer;
+	private ButtonWidget BtnStripPlayer;
 	private ButtonWidget BtnKillPlayer;
-	///
-	
-	///Map View
-	private Widget switchWidgetMap;
-	private MapWidget mapWidget;
-	private ButtonWidget btnMapView;
-	///
 	
 	private bool isInitialized;
     private bool isMenuOpen;
-	private bool isPlayerViewerOpened = false;
-	private bool isMapViewerOpened = false;
-	
-	private PlayerBase player;
 	
 	private string gmValue;
 	private string bindsValue;
+	
+	private Widget mapWidget;
+	private MapWidget falconMAP;
+	private ButtonWidget switchMapBUTTON;
+	
+	private EditBoxWidget viewDistanceTEXT;
+	private ButtonWidget viewBUTTON;
+	
+	private ButtonWidget invBUTTON;
+	
+	private Widget currentViewWidget;
 	
 	ref FalconToolsV2 FalconToolsv2;
 			
@@ -68,11 +76,12 @@ class FalconMonitor extends UIScriptedMenu
 		
 		///Player Viewer Commands
 		GetRPCManager().AddRPC( "FalconTools", "getTargetPlayerC", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "FalconTools", "getTargetPlayerHealthC", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "FalconTools", "getTargetPlayerPosC", this, SingeplayerExecutionType.Server );
 		///
 		GetRPCManager().AddRPC( "FalconTools", "setPlayersListC", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "FalconTools", "setPlayersOnServerC", this, SingeplayerExecutionType.Server );
+		
+		GetRPCManager().AddRPC( "FalconTools", "setSpawnerPackagesC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "setPlayersPositionsC", this, SingeplayerExecutionType.Server );
 	}
 	
 	//Deconstructor
@@ -114,12 +123,14 @@ class FalconMonitor extends UIScriptedMenu
 			setPositionBoxY = EditBoxWidget.Cast( widgetRoot.FindAnyWidget( "SetPositionBOXY" ));
 			spawnerBox = EditBoxWidget.Cast( widgetRoot.FindAnyWidget( "SpawnerBOX" ));
 			btnSpawn = ButtonWidget.Cast( widgetRoot.FindAnyWidget( "BtnSpawn" ));
+			messagePlayersInput = EditBoxWidget.Cast( widgetRoot.FindAnyWidget("MessagePlayersINPUT"));
+			btnMessagePlayers = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnMessagePlayers"));
 			
 			playersWidget = TextListboxWidget.Cast(widgetRoot.FindAnyWidget("PlayersListBOX"));
 			playersOnServerTEXT = TextWidget.Cast(widgetRoot.FindAnyWidget("PlayersOnServerTEXT"));
 			
 			///Player Viewer
-			switchWidgetPlayer = Widget.Cast(widgetRoot.FindAnyWidget("SwitchWidgetPlayer"));
+			playerWidget = Widget.Cast(widgetRoot.FindAnyWidget("SwitchWidgetPlayer"));
 			
 			targetPlayerName = TextWidget.Cast(widgetRoot.FindAnyWidget("PlayerNameTEXT"));
 			targetHealthText = TextWidget.Cast(widgetRoot.FindAnyWidget("PlayerHealthTEXT"));
@@ -127,19 +138,16 @@ class FalconMonitor extends UIScriptedMenu
 			playerPosZText = TextWidget.Cast(widgetRoot.FindAnyWidget("PlayerPosZTEXT"));
 			playerPosYText = TextWidget.Cast(widgetRoot.FindAnyWidget("PlayerPosYTEXT"));
 			
-			btnPlayerView = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnPlayerView"));
+			playerOrientationText = TextWidget.Cast(widgetRoot.FindAnyWidget("OrientationTEXT"));
+			
+			playerIdentityTEXT = TextWidget.Cast(widgetRoot.FindAnyWidget("PlayerIdentityTEXT"));
 			
 			BtnTPtoPlayer = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnTPtoPlayer")); 
 			BtnFreeze = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnFreeze")); 
 			BtnTPtoMe = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnTPtoMe")); 
 			BtnHealPlayer = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnHealPlayer")); 
+			BtnStripPlayer = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnStripPlayer")); 
 			BtnKillPlayer = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnKillPlayer"));
-			///
-			
-			///Map View
-			switchWidgetMap = Widget.Cast(widgetRoot.FindAnyWidget("SwitchWidgetMap"));
-			mapWidget = MapWidget.Cast(widgetRoot.FindAnyWidget("MapWidget"));
-			btnMapView = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnMapView"));
 			///
 			
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnGM, this, "setGodMode" );
@@ -153,37 +161,62 @@ class FalconMonitor extends UIScriptedMenu
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnApplyPosition, this, "applyPosition" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnSpawn, this, "spawnItem" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( playersWidget, this, "selectPlayer" );
-			WidgetEventHandler.GetInstance().RegisterOnClick( btnPlayerView, this, "switchPlayerViewer" );
+			
+			WidgetEventHandler.GetInstance().RegisterOnClick( btnMessagePlayers, this, "messagePlayers" );
 			
 			///Player Viewer Buttons
 			WidgetEventHandler.GetInstance().RegisterOnClick( BtnTPtoPlayer, this, "tpToTarget" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( BtnFreeze, this, "freezeTarget" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( BtnTPtoMe, this, "tpToMe" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( BtnHealPlayer, this, "healTarget" );
+			WidgetEventHandler.GetInstance().RegisterOnClick( BtnStripPlayer, this, "stripTarget" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( BtnKillPlayer, this, "killTarget" );
 			///
-						
-			///Map Viewer Buttons
-			WidgetEventHandler.GetInstance().RegisterOnClick(btnMapView, this, "switchMapViewer");
+			
+			///Items Spawner
+			spawnerPacksLIST = TextListboxWidget.Cast( widgetRoot.FindAnyWidget("SpawnerPacksLIST"));
+			btnSpawnPack = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnSpawnPack"));
+			WidgetEventHandler.GetInstance().RegisterOnClick( btnSpawnPack, this, "spawnPack" );
 			///
+			mapWidget = Widget.Cast(widgetRoot.FindAnyWidget("MapWIDGET"));
+			
+			falconMAP = MapWidget.Cast(widgetRoot.FindAnyWidget("FalconMAP"));
+			switchMapBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("MapBUTTON"));
+			WidgetEventHandler.GetInstance().RegisterOnClick( switchMapBUTTON, this, "showMapWidget" );
+			
+			viewDistanceTEXT = EditBoxWidget.Cast(widgetRoot.FindAnyWidget("ViewDistanceTEXT"));
+			viewBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("ViewBUTTON"));
+			WidgetEventHandler.GetInstance().RegisterOnClick( viewBUTTON, this, "setViewDistance" );
+			
+			invBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("invBUTTON"));
+			WidgetEventHandler.GetInstance().RegisterOnClick( invBUTTON, this, "switchInv" );
 			
 			isInitialized = true;
 		}
+		
+		initWidget();
+		
+		return widgetRoot;		
+	}
+	
+	void initWidget() {
+		playersWidget.ClearItems();
+		spawnerPacksLIST.ClearItems();
+		playerWidget.Show(false);
+		falconMAP.ClearUserMarks();
 		
 		setPosition();
 		setTime();
 		setGM();
 		setBinds();
+		setOrientation();
 		
-		playersWidget.ClearItems();
 		setPlayersList();
+		setPlayersPositions();
 		setPlayersOnServer();
+		setSpawnerPackages();
 		
-		hidePlayerViewer();
-		hideMapViewer();
-		
-		
-		return widgetRoot;		
+		currentViewWidget = mapWidget;
 	}
 
 	override void OnHide() {
@@ -200,10 +233,6 @@ class FalconMonitor extends UIScriptedMenu
 		lockControls();
     }
 	
-	override void Update(float timeslice) {
-        super.Update(timeslice);
-    }
-	
 	bool isMenuOpened() {
         return isMenuOpen;
     }
@@ -217,13 +246,15 @@ class FalconMonitor extends UIScriptedMenu
     }
 	
 	private void setPosition() {
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		
 		if (player != null)
 		{
 			vector pos = player.GetPosition();
 		
 			setPositionBoxX.SetText(pos[0].ToString());
-			setPositionBoxZ.SetText(pos[1].ToString());
-			setPositionBoxY.SetText(pos[2].ToString());
+			setPositionBoxY.SetText(pos[1].ToString());
+			setPositionBoxZ.SetText(pos[2].ToString());
 		}
 	}
 	
@@ -252,6 +283,15 @@ class FalconMonitor extends UIScriptedMenu
 		}
 	}
 	
+	private void setOrientation()
+	{
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		
+		string orientation = player.GetDirection().ToString();
+		
+		playerOrientationText.SetText(orientation);
+	}
+	
 	private void setBinds() {
 		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
 		
@@ -268,20 +308,18 @@ class FalconMonitor extends UIScriptedMenu
 		}
 	}
 	
-	void setPlayer(PlayerBase player) {
-		this.player = player;
-	}
-	
-	void setBindsMode() {
+	private void setBindsMode() {
 		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
 		
 		if (player != null)
 		{
 			player.setAreBindsOn(!player.getAreBindsOn());
 		}
+		
+		setBinds();
 	}
 	
-	void setGodMode() {
+	private void setGodMode() {
 		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
 		
 		if (player != null)
@@ -289,46 +327,81 @@ class FalconMonitor extends UIScriptedMenu
 			player.setHasGm(!player.getHasGm());
 			FalconToolsv2.turnGM();	
 		}
+		
+		setGM();
 	}
 	
-	void applyWorld() {
+	private void setViewDistance()
+	{
+		int distance = viewDistanceTEXT.GetText().ToInt();
+		
+		GetGame().GetWorld().SetPreferredViewDistance(distance);
+		GetGame().GetWorld().SetViewDistance(distance);
+		GetGame().GetWorld().SetObjectViewDistance(distance);
+	}
+	
+	private void switchInv()
+	{
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		
+		player.setIsInv(!player.getIsInv());
+	}
+	
+	private void showMapWidget()
+	{
+		switchViewWidget(mapWidget);
+	}
+	
+	private void showPlayerWidget()
+	{
+		switchViewWidget(playerWidget);
+	}
+	
+	private void switchViewWidget(Widget widget) 
+	{
+		currentViewWidget.Show(false);
+		currentViewWidget = widget;
+		currentViewWidget.Show(true);
+	}
+	
+	private void applyWorld() {
 		string time = worldTimeBox.GetText();
 		
 		FalconToolsv2.changeTime(time);
 	}
 	
-	void healPlayer() {
+	private void healPlayer() {
 		FalconToolsv2.selfHeal();
 	}
 	
-	void kys() {
+	private void kys() {
 		FalconToolsv2.kys();
 	}
-	void takeMeHome() {
+	private void takeMeHome() {
 		FalconToolsv2.safe();
 	}
 	
-	void getAdmLoadout() {
+	private void getAdmLoadout() {
 		FalconToolsv2.adm();
 	}
 	
-	void getCar() {
+	private void getCar() {
 		FalconToolsv2.car();
 	}
 	
-	void applyPosition() {
+	private void applyPosition() {
 		
 		string tpPosX = setPositionBoxX.GetText();
 		string tpPosZ = setPositionBoxZ.GetText();
 		string tpPosY = setPositionBoxY.GetText();
 		
-		string vecto = tpPosX + " " + tpPosZ + " " + tpPosY;
+		string vecto = tpPosX + " " + tpPosY + " " + tpPosZ;
 		vector vec = vecto.ToVector();
 		
 		FalconToolsv2.setPos(vec);
 	}
 	
-	void spawnItem() {
+	private void spawnItem() {
 		FalconToolsv2.spawnItem(spawnerBox.GetText());
 	}
 	
@@ -342,74 +415,57 @@ class FalconMonitor extends UIScriptedMenu
 			if (data.param1)
 			{
 				playersWidget.ClearItems();
-				array<string> playersNames = data.param1;
 				
-				foreach (string playerName : playersNames) {
-					playersWidget.AddItem(playerName, NULL, 0);
+				array<string> playersNames = new array<string>();
+				playersNames = data.param1;
+				
+				for (int i = 0; i < playersNames.Count(); i++)
+				{
+					playersWidget.AddItem(playersNames[i], NULL, 0);
 				}
 			}
 		}
 	}
 	
-	void setPlayersList() {
+	private void setPlayersList() {
 		FalconToolsv2.setPlayersList();
 	}
 	
-	void selectPlayer() {
+	private void selectPlayer() {
 		int ind = playersWidget.GetSelectedRow();
 		string playerName;
 		
 		playersWidget.GetItemText(ind, 0, playerName);
 		FalconToolsv2.getTargetPlayer(playerName);
 		
-		switchPlayerViewer();
+		showPlayerWidget();
 	}
 	
 	void getTargetPlayerC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) {
 		
-		Param1<string> data;
+		Param1<TargetPlayerPackage> data;
         if ( !ctx.Read(data)) return;
 		
 		if (type == CallType.Client)
         {
 			if (data.param1)
 			{
-				string targetPName = data.param1;
-				targetPlayerName.SetText(targetPName);
-			}
-		}
-	}
-	
-	void getTargetPlayerHealthC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) {
-		
-		Param1<string> data;
-        if ( !ctx.Read(data)) return;
-		
-		if (type == CallType.Client)
-        {
-			if (data.param1)
-			{
-				targetHealthText.SetText(data.param1);
-			}
-		}
-	}
-	
-	void getTargetPlayerPosC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) {
-		
-		Param1<vector> data;
-        if ( !ctx.Read(data)) return;
-		
-		if (type == CallType.Client)
-        {
-			if (data.param1)
-			{
-				vector targetPos = data.param1;
+				TargetPlayerPackage dataPackage = data.param1;
 				
-				playerPosXText.SetText(targetPos[0].ToString());
-				playerPosZText.SetText(targetPos[1].ToString());
-				playerPosYText.SetText(targetPos[2].ToString());
+				targetPlayerName.SetText(dataPackage.playerName);
+				playerIdentityTEXT.SetText(dataPackage.playerIdentity);
+				targetHealthText.SetText(dataPackage.playerHealth);
+				playerPosXText.SetText(dataPackage.playerPos[0].ToString());
+				playerPosZText.SetText(dataPackage.playerPos[1].ToString());
+				playerPosYText.SetText(dataPackage.playerPos[2].ToString());
 			}
 		}
+	}
+	
+	private void messagePlayers() {
+		string message = messagePlayersInput.GetText();
+		
+		FalconToolsv2.messagePlayers(message);
 	}
 	
 	private void tpToTarget() {
@@ -448,6 +504,15 @@ class FalconMonitor extends UIScriptedMenu
 		FalconToolsv2.healTarget(playerName);
 	}
 	
+	private void stripTarget() {
+		int ind = playersWidget.GetSelectedRow();
+		string playerName;
+		
+		playersWidget.GetItemText(ind, 0, playerName);
+		
+		FalconToolsv2.stripTarget(playerName);
+	}
+	
 	private void killTarget() {
 		int ind = playersWidget.GetSelectedRow();
 		string playerName;
@@ -455,28 +520,6 @@ class FalconMonitor extends UIScriptedMenu
 		playersWidget.GetItemText(ind, 0, playerName);
 		
 		FalconToolsv2.killTarget(playerName);
-	}
-	
-	private void switchPlayerViewer() {
-		if (isPlayerViewerOpened) {
-			hidePlayerViewer();
-			isPlayerViewerOpened = false;	
-		}
-		else {
-			showPlayerViewer();
-			isPlayerViewerOpened = true;
-		}
-	}
-	
-	private void switchMapViewer() {
-		if (isMapViewerOpened) {
-			hideMapViewer();
-			isMapViewerOpened = false;	
-		}
-		else {
-			hideMapViewer();
-			isMapViewerOpened = true;
-		}
 	}
 	
 	void setPlayersOnServerC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) {
@@ -499,30 +542,87 @@ class FalconMonitor extends UIScriptedMenu
 		FalconToolsv2.setPlayersOnServer();
 	}
 	
-	private void hidePlayerViewer() {	
-		switchWidgetPlayer.Show(false);
+	void setSpawnerPackagesC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) 
+	{
+		Param1<array<string>> data;
+        if ( !ctx.Read(data)) return;
 		
-		isPlayerViewerOpened = false;
+		if (type == CallType.Client)
+        {
+			if (data.param1)
+			{
+				array<string> packageName = new array<string>();
+				packageName = data.param1;
+				
+				for (int i = 0; i < packageName.Count(); i++) 
+				{
+					spawnerPacksLIST.AddItem(packageName[i], NULL, 0);
+				}
+			}
+		}
 	}
 	
-	private void showPlayerViewer() {
-		switchWidgetPlayer.Show(true);
-		
-		isPlayerViewerOpened = true;
+	private void setSpawnerPackages() 
+	{
+		FalconToolsv2.setSpawnerPackages();
 	}
 	
-	private void hideMapViewer() {
-		switchWidgetMap.Show(false);
+	void setPlayersPositionsC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) 
+	{
+		Param1<array<ref PlayerPositionPackage>> data;
+        if ( !ctx.Read(data)) return;
 		
-		isMapViewerOpened = false;
+		if (type == CallType.Client)
+        {
+			if (data.param1)
+			{
+				array<ref PlayerPositionPackage> positions = new array<ref PlayerPositionPackage>();
+				positions = data.param1;
+				
+				for (int i = 0; i < positions.Count(); i++) 
+				{
+					falconMAP.AddUserMark( positions[i].playerPosition, positions[i].playerName, ARGB( 255, 230, 20, 20 ), "gui\textures\dot.paa" );
+				}
+			}
+		}
 	}
 	
-	private void showMapViewer() {
-		switchWidgetMap.Show(true);
-		
-		isMapViewerOpened = true;
+	private void setPlayersPositions() 
+	{
+		FalconToolsv2.setPlayersPositions();
 	}
 	
+	private void spawnPack()
+	{
+		int ind = spawnerPacksLIST.GetSelectedRow();
+		
+		if (ind >= 0)
+		{
+			string packageName;
+		
+			spawnerPacksLIST.GetItemText(ind, 0, packageName);
+			
+			if (packageName)
+			{
+				FalconToolsv2.spawnPackage(packageName);
+			}
+		}
+	}
+	
+	override bool OnDoubleClick(Widget w, int x, int y, int button) 
+	{	
+		if (w == falconMAP)
+		{	
+			vector cursorPosition = falconMAP.ScreenToMap(Vector(x, y, 0));
+			
+			FalconToolsv2.tpOnClick(Vector(cursorPosition[0], GetGame().SurfaceY(cursorPosition[0], cursorPosition[2]), cursorPosition[2]));
+						
+			return true;
+		}
+		
+		return true;
+	}
+		
 	private void lockControls()
     {
         GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_ALL);

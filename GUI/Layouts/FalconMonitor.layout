@@ -34,7 +34,7 @@ FrameWidgetClass rootFrame {
      hexactsize 0
      vexactsize 0
      style Normal
-     text "FalconTools v0.3"
+     text "FalconTools v0.6"
      font "gui/fonts/Metron-Bold28"
      "exact text" 1
      "size to text h" 1
@@ -45,7 +45,7 @@ FrameWidgetClass rootFrame {
     ButtonWidgetClass BtnGM {
      visible 1
      position 0.01191 0.01531
-     size 0.1459 0.055
+     size 0.11213 0.055
      valign bottom_ref
      hexactpos 0
      vexactpos 0
@@ -68,8 +68,8 @@ FrameWidgetClass rootFrame {
     }
     ButtonWidgetClass BtnKYS {
      visible 1
-     position 0.16972 0.01531
-     size 0.1459 0.055
+     position 0.13073 0.01609
+     size 0.12036 0.055
      valign bottom_ref
      hexactpos 0
      vexactpos 0
@@ -93,8 +93,8 @@ FrameWidgetClass rootFrame {
     ButtonWidgetClass BtnHEAL {
      visible 1
      clipchildren 1
-     position 0.32752 0.01531
-     size 0.1459 0.055
+     position 0.25778 0.01609
+     size 0.12036 0.055
      valign bottom_ref
      hexactpos 0
      vexactpos 0
@@ -147,6 +147,49 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      style editor_quad
+     {
+      TextWidgetClass OrientationTEXT {
+       ignorepointer 1
+       position 12.589 453.409
+       size 428.22202 50.3785
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text_proportion 0.7
+       "text halign" center
+       "text valign" center
+      }
+      TextListboxWidgetClass SpawnerPacksLIST {
+       position 12.5947 714.75
+       size 428.21603 129.09599
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       lines 10
+      }
+      ButtonWidgetClass ViewBUTTON {
+       position 390.43201 516.38202
+       size 50.3786 62.974
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Set"
+      }
+      EditBoxWidgetClass ViewDistanceTEXT {
+       position 12.589 516.38202
+       size 365.24802 62.974
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Default
+       text "1600"
+      }
+     }
     }
     PanelWidgetClass PanelWidget2 {
      ignorepointer 1
@@ -157,6 +200,18 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      style editor_quad
+     {
+      ButtonWidgetClass MapBUTTON {
+       position 541.57202 9.28313
+       size 151.13701 35.4053
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Map"
+      }
+     }
     }
     PanelWidgetClass PanelWidget3 {
      ignorepointer 1
@@ -171,14 +226,14 @@ FrameWidgetClass rootFrame {
     PanelWidgetClass PanelWidget4 {
      ignorepointer 1
      position 6.93347 571.79602
-     size 541.57404 403.03201
+     size 541.57404 188.91798
      hexactpos 1
      vexactpos 1
      hexactsize 1
      vexactsize 1
      style editor_quad
     }
-    TextWidgetClass WorldSettingsTITLE {
+    TextWidgetClass TimeSettingsTITLE {
      ignorepointer 1
      position 6.93349 584.39099
      size 541.57404 48
@@ -193,7 +248,7 @@ FrameWidgetClass rootFrame {
     ButtonWidgetClass BtnLOADOUT {
      visible 1
      clipchildren 1
-     position 0.48289 0.01638
+     position 0.38482 0.01609
      size 0.13099 0.055
      valign bottom_ref
      hexactpos 0
@@ -206,8 +261,8 @@ FrameWidgetClass rootFrame {
     ButtonWidgetClass BtnCAR {
      visible 1
      clipchildren 1
-     position 0.62578 0.01638
-     size 0.08336 0.055
+     position 0.52524 0.01609
+     size 0.1003 0.055
      valign bottom_ref
      hexactpos 0
      vexactpos 0
@@ -219,7 +274,7 @@ FrameWidgetClass rootFrame {
     ButtonWidgetClass BtnApplyWorld {
      visible 1
      clipchildren 1
-     position 0.07723 0.09903
+     position 0.08392 0.30046
      size 0.13373 0.04315
      valign bottom_ref
      hexactpos 0
@@ -229,25 +284,14 @@ FrameWidgetClass rootFrame {
      style Editor
      text "Apply"
     }
-    TextWidgetClass WorldTimeTITLE {
-     ignorepointer 1
-     position 6.9335 634.76898
-     size 163.73199 48
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-     text "Time"
-     "text halign" center
-     "text valign" center
-    }
     EditBoxWidgetClass SetTimeBOX {
-     position 170.66501 634.77002
+     position 107.68999 634.76703
      size 365.24802 50.3795
      hexactpos 1
      vexactpos 1
      hexactsize 1
      vexactsize 1
+     style DefaultBorder
     }
     EditBoxWidgetClass SetPositionBOXX {
      position 1518.30005 206.54799
@@ -272,7 +316,7 @@ FrameWidgetClass rootFrame {
      text "Set"
     }
     EditBoxWidgetClass SetPositionBOXY {
-     position 1518.30005 307.306
+     position 1518.30005 256.92398
      size 340.06201 48
      hexactpos 1
      vexactpos 1
@@ -281,7 +325,7 @@ FrameWidgetClass rootFrame {
      scaled 1
     }
     EditBoxWidgetClass SetPositionBOXZ {
-     position 1518.30005 256.92697
+     position 1518.30005 307.30298
      size 340.06201 48
      hexactpos 1
      vexactpos 1
@@ -303,7 +347,7 @@ FrameWidgetClass rootFrame {
     }
     TextWidgetClass PostitionTITLE1 {
      ignorepointer 1
-     position 1417.55005 256.92697
+     position 1417.54004 307.30298
      size 100.758 50.3788
      hexactpos 1
      vexactpos 1
@@ -315,7 +359,7 @@ FrameWidgetClass rootFrame {
     }
     TextWidgetClass PostitionTITLE2 {
      ignorepointer 1
-     position 1417.55005 307.306
+     position 1417.54004 256.92398
      size 100.758 48
      hexactpos 1
      vexactpos 1
@@ -349,17 +393,18 @@ FrameWidgetClass rootFrame {
     }
     EditBoxWidgetClass SpawnerBOX {
      position 1430.14001 697.74298
-     size 327.46399 48
+     size 340.05698 48
      hexactpos 1
      vexactpos 1
      hexactsize 1
      vexactsize 1
      scaled 1
+     style DefaultBorder
     }
     ButtonWidgetClass BtnSpawn {
      visible 1
      clipchildren 1
-     position 0.93982 0.29621
+     position 0.94651 0.29622
      size 0.04012 0.04739
      valign bottom_ref
      hexactpos 0
@@ -381,122 +426,18 @@ FrameWidgetClass rootFrame {
      "text halign" center
      "text valign" center
     }
-    ButtonWidgetClass BtnSpawnCUSTOM1 {
-     visible 1
-     clipchildren 1
-     position 0.86627 0.16588
-     size 0.05349 0.05924
-     valign bottom_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style Editor
-     text "Spawn 7"
-    }
-    ButtonWidgetClass BtnSpawnCUSTOM2 {
-     visible 1
-     clipchildren 1
-     position 0.92645 0.17012
-     size 0.05349 0.055
-     valign bottom_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style Editor
-     text "Spawn 8"
-    }
-    ButtonWidgetClass BtnSpawnCUSTOM3 {
+    ButtonWidgetClass BtnSpawnPack {
      visible 1
      clipchildren 1
      position 0.75928 0.09903
-     size 0.22066 0.055
+     size 0.22735 0.055
      valign bottom_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
      style Editor
-     text "Spawn 9"
-    }
-    ButtonWidgetClass BtnSpawnCUSTOM4 {
-     visible 1
-     clipchildren 1
-     position 0.92645 0.22936
-     size 0.05349 0.055
-     valign bottom_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style Editor
-     text "Spawn 4"
-    }
-    ButtonWidgetClass BtnSpawnCUSTOM5 {
-     visible 1
-     clipchildren 1
-     position 0.75928 0.22936
-     size 0.04681 0.055
-     valign bottom_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style Editor
-     text "Spawn 1"
-    }
-    ButtonWidgetClass BtnSpawnCUSTOM6 {
-     visible 1
-     clipchildren 1
-     position 0.81277 0.22936
-     size 0.04681 0.055
-     valign bottom_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style Editor
-     text "Spawn 2"
-    }
-    ButtonWidgetClass BtnSpawnCUSTOM7 {
-     visible 1
-     clipchildren 1
-     position 0.75928 0.17012
-     size 0.04681 0.055
-     valign bottom_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style Editor
-     text "Spawn 5"
-    }
-    ButtonWidgetClass BtnSpawnCUSTOM8 {
-     visible 1
-     clipchildren 1
-     position 0.81277 0.17012
-     size 0.04681 0.055
-     valign bottom_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style Editor
-     text "Spawn 6"
-    }
-    ButtonWidgetClass BtnSpawnCUSTOM9 {
-     visible 1
-     clipchildren 1
-     position 0.86627 0.22936
-     size 0.05349 0.055
-     valign bottom_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style Editor
-     text "Spawn 3"
+     text "Spawn Pack"
     }
     TextListboxWidgetClass PlayersListBOX {
      position 19.5282 143.57201
@@ -505,10 +446,11 @@ FrameWidgetClass rootFrame {
      vexactpos 1
      hexactsize 1
      vexactsize 1
+     lines 10
      "highlight row" 0
     }
     PanelWidgetClass SwitchWidgetPlayer {
-     visible 1
+     visible 0
      ignorepointer 1
      position 548.50598 93.1926
      size 869.03802 881.633
@@ -531,24 +473,12 @@ FrameWidgetClass rootFrame {
       }
       TextWidgetClass PlayerNameTEXT {
        ignorepointer 1
-       position 176.32501 88.1606
+       position 176.32701 25.1895
        size 503.79001 50.379
        hexactpos 1
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       "text halign" center
-       "text valign" center
-      }
-      TextWidgetClass PlayerViewTitleTEXT {
-       ignorepointer 1
-       position 176.32501 12.5921
-       size 503.79001 50.379
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       text "Player Viewer"
        "text halign" center
        "text valign" center
       }
@@ -637,7 +567,7 @@ FrameWidgetClass rootFrame {
       ButtonWidgetClass BtnHealPlayer {
        visible 1
        clipchildren 1
-       position 0.65217 0.03072
+       position 0.52174 0.03072
        size 0.15158 0.08357
        valign bottom_ref
        hexactpos 0
@@ -650,8 +580,8 @@ FrameWidgetClass rootFrame {
       ButtonWidgetClass BtnTPtoMe {
        visible 1
        clipchildren 1
-       position 0.23188 0.03072
-       size 0.15942 0.08357
+       position 0.02899 0.13072
+       size 0.17391 0.08357
        valign bottom_ref
        hexactpos 0
        vexactpos 0
@@ -663,7 +593,7 @@ FrameWidgetClass rootFrame {
       ButtonWidgetClass BtnTPtoPlayer {
        visible 1
        clipchildren 1
-       position 0.04348 0.03072
+       position 0.02899 0.03072
        size 0.17391 0.08357
        valign bottom_ref
        hexactpos 0
@@ -676,7 +606,7 @@ FrameWidgetClass rootFrame {
       ButtonWidgetClass BtnFreeze {
        visible 1
        clipchildren 1
-       position 0.4058 0.03072
+       position 0.21739 0.13072
        size 0.15942 0.08357
        valign bottom_ref
        hexactpos 0
@@ -698,81 +628,49 @@ FrameWidgetClass rootFrame {
        "text halign" center
        "text valign" center
       }
-     }
-    }
-    ButtonWidgetClass BtnPlayerView {
-     visible 1
-     clipchildren 1
-     position 0.2979 0.91657
-     size 0.06687 0.04315
-     valign bottom_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style Editor
-     text "Player"
-    }
-    ButtonWidgetClass BtnMapView {
-     visible 1
-     clipchildren 1
-     position 0.37145 0.91657
-     size 0.06687 0.04315
-     valign bottom_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style Editor
-     text "Map"
-    }
-    ButtonWidgetClass BtnInfoView {
-     visible 1
-     clipchildren 1
-     position 0.445 0.91657
-     size 0.06687 0.04315
-     valign bottom_ref
-     hexactpos 0
-     vexactpos 0
-     hexactsize 0
-     vexactsize 0
-     style Editor
-     text "Info"
-    }
-    PanelWidgetClass SwitchWidgetMap {
-     ignorepointer 1
-     position 548.50598 93.1926
-     size 869.03802 881.633
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-     style editor_quad
-     {
-      MapWidgetClass MapWidget {
-       position 14.1671 12.5947
-       size 843.84796 856.44299
+      ButtonWidgetClass BtnStripPlayer {
+       visible 1
+       clipchildren 1
+       position 0.21739 0.03072
+       size 0.15942 0.08357
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Editor
+       text "Strip Player"
+      }
+      TextWidgetClass PlayerIdentityTITLE {
+       ignorepointer 1
+       position 176.32701 440.81601
+       size 503.79001 50.379
        hexactpos 1
        vexactpos 1
        hexactsize 1
        vexactsize 1
+       text "Player Identity"
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass PlayerIdentityTEXT {
+       ignorepointer 1
+       position 25.19 503.79001
+       size 818.65894 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text_proportion 0.5
+       "text halign" center
+       "text valign" center
       }
      }
-    }
-    PanelWidgetClass SwitchWidgetInfo {
-     ignorepointer 1
-     position 546.93408 93.1926
-     size 869.03802 881.633
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-     style editor_quad
     }
     TextWidgetClass PlayersOnServerTEXT {
      ignorepointer 1
      position 6.93205 93.1926
-     size 554.16895 48
+     size 536.87598 48
      hexactpos 1
      vexactpos 1
      hexactsize 1
@@ -806,6 +704,94 @@ FrameWidgetClass rootFrame {
      "size to text v" 0
      "text halign" center
      "text valign" center
+    }
+    PanelWidgetClass PanelWidget6 {
+     ignorepointer 1
+     position 6.93205 760.71405
+     size 541.57404 214.11101
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+     {
+      TextWidgetClass MessagePlayersTITLE {
+       ignorepointer 1
+       position 0 0.00037
+       size 541.57404 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Message Players"
+       "text halign" center
+       "text valign" center
+      }
+      ButtonWidgetClass BtnMessagePlayers {
+       position 151.13701 163.73199
+       size 251.895 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Send"
+      }
+      EditBoxWidgetClass MessagePlayersINPUT {
+       position 0 62.9741
+       size 541.57404 75.5685
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style DefaultBorder
+      }
+     }
+    }
+    TextWidgetClass OrientationTITLE {
+     ignorepointer 1
+     position 1516.80005 433.25101
+     size 291.095 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "Direction"
+     "text halign" center
+     "text valign" center
+    }
+    PanelWidgetClass MapWIDGET {
+     ignorepointer 1
+     position 548.50598 93.1926
+     size 869.03802 881.633
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+     {
+      MapWidgetClass FalconMAP {
+       position 12.5952 12.5947
+       size 843.84796 856.44299
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+      }
+     }
+    }
+    ButtonWidgetClass invBUTTON {
+     visible 1
+     clipchildren 1
+     position 0.63892 0.01609
+     size 0.0534 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Inv"
     }
    }
   }
