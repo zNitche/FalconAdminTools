@@ -7,7 +7,7 @@ class FalconToolsV2
 		GetRPCManager().AddRPC( "FalconTools", "kysS", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "FalconTools", "safeS", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "FalconTools", "admS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "FalconTools", "carS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "spawnVehicleS", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "FalconTools", "changeTimeS", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "FalconTools", "tpToPosS", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "FalconTools", "deleteObjectS", this, SingeplayerExecutionType.Server );
@@ -35,6 +35,14 @@ class FalconToolsV2
 		
 		GetRPCManager().AddRPC( "FalconTools", "setPlayersPositionsS", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "FalconTools", "tpOnClickS", this, SingeplayerExecutionType.Server );
+		
+		GetRPCManager().AddRPC( "FalconTools", "switchESPS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "disableESPS", this, SingeplayerExecutionType.Server );
+		
+		GetRPCManager().AddRPC( "FalconTools", "spawnMissionS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "clearMissionsS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "clearAIMissionsS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconTools", "clearKOTHMissionsS", this, SingeplayerExecutionType.Server );
     }
 	
 	private PlayerBase getPlayer(PlayerIdentity sender) {
@@ -53,7 +61,12 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				#ifdef FALCON_LOGS
+					FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_ACTIVATED_PANEL);
+				#endif
+				
 				GetRPCManager().SendRPC( "FalconTools", "OpenMenuC", new Param1<bool>(true), true, sender);
 			}
         }
@@ -66,7 +79,12 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {				
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{				
+				#ifdef FALCON_LOGS
+					FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_ACTIVATED_FREECAM);
+				#endif
+				
 				GetRPCManager().SendRPC( "FalconTools", "ToggleFreecamC", new Param1<bool>(true), true, sender);
 			}
         }
@@ -79,9 +97,11 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
-				
-				FalconLogger.logAction(sender.GetId(), "", "adminGM");
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				#ifdef FALCON_LOGS
+					FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_SWITCHED_GM);
+				#endif
 				
 				PlayerBase player = getPlayer(sender);
 				
@@ -162,17 +182,11 @@ class FalconToolsV2
         if ( !ctx.Read( data ) ) return;
         
 		
-        if( type == CallType.Server ) {
+        if ( type == CallType.Server ) {
 
-			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
-				PlayerBase player = getPlayer(sender);
-				
-				EntityAI weapon = player.GetHumanInventory().CreateInHands("M4A1");
-					
-				weapon.GetInventory().CreateAttachment("M4_OEBttstck");
-				weapon.GetInventory().CreateAttachment("M4_CarryHandleOptic");
-				weapon.GetInventory().CreateAttachment("M4_PlasticHndgrd");
-				player.GetInventory().CreateInInventory("Mag_STANAG_30Rnd");
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				FalconUtils.spawnAdminLoadout(getPlayer(sender));
 			}
         }
     }
@@ -181,38 +195,25 @@ class FalconToolsV2
 		GetRPCManager().SendRPC( "FalconTools", "admS", new Param1<string>("") );
 	}
 	
-	private void carS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
+	private void spawnVehicleS(CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target)
     {
-        Param1< string > data;
-        if ( !ctx.Read( data ) ) return;
+        Param1<string> data;
+        if (!ctx.Read(data)) return;
         
-		
-        if( type == CallType.Server ) {
-
-			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
-				Car vehicle;
-				PlayerBase player = getPlayer(sender);
-				
-				vehicle = Car.Cast(GetGame().CreateObject("OffroadHatchback", player.GetPosition()));
-				vehicle.Fill(CarFluid.FUEL, 1000);
-				vehicle.GetInventory().CreateAttachment("HatchbackTrunk");
-				vehicle.GetInventory().CreateAttachment("HatchbackHood");
-				vehicle.GetInventory().CreateAttachment("HatchbackDoors_CoDriver");
-				vehicle.GetInventory().CreateAttachment("HatchbackDoors_Driver");
-				vehicle.GetInventory().CreateAttachment("HatchbackWheel");
-				vehicle.GetInventory().CreateAttachment("HatchbackWheel");
-				vehicle.GetInventory().CreateAttachment("HatchbackWheel");
-				vehicle.GetInventory().CreateAttachment("HatchbackWheel");
-				vehicle.GetInventory().CreateAttachment("CarBattery");
-				vehicle.GetInventory().CreateAttachment("SparkPlug");
-				vehicle.GetInventory().CreateAttachment("CarRadiator");
-				vehicle.Fill(CarFluid.COOLANT, 1000);
+        if (type == CallType.Server) 
+		{
+			if (data.param1)
+			{
+				if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+				{
+					FalconUtils.spawnVehicle(data.param1, getPlayer(sender).GetPosition());
+				}
 			}
         }
     }
 	
-	void car() {
-		GetRPCManager().SendRPC( "FalconTools", "carS", new Param1<string>("") );
+	void spawnVehicle(string vehicleName) {
+		GetRPCManager().SendRPC( "FalconTools", "spawnVehicleS", new Param1<string>(vehicleName) );
 	}
 	
 	private void changeTimeS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -248,8 +249,12 @@ class FalconToolsV2
         
 		
         if( type == CallType.Server ) {
-			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
-				FalconLogger.logAction(sender.GetId(), data.param1.ToString(), "adminTP");
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				#ifdef FALCON_LOGS
+					FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_TELEPORTED + data.param1.ToString());
+				#endif
+				
 				PlayerBase player = getPlayer(sender);
 				player.SetPosition(data.param1);
 			}
@@ -264,10 +269,12 @@ class FalconToolsV2
         if( type == CallType.Server ) {
 			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
 			{
-				FalconLogger.logAction(sender.GetId(), data.param1.ToString(), "DeleteObject");
-				
 				if (data.param1)
 				{
+					#ifdef FALCON_LOGS
+						FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_DELETED_OBJECT + data.param1.GetName());
+					#endif
+					
 					GetGame().ObjectDelete(data.param1);
 				}
 			}
@@ -280,8 +287,12 @@ class FalconToolsV2
         if ( !ctx.Read( data ) ) return;
         
         if( type == CallType.Server ) {
-			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
-				FalconLogger.logAction(sender.GetId(), data.param1.ToString(), "adminTP");
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				#ifdef FALCON_LOGS
+					FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_TELEPORTED + data.param1.ToString());
+				#endif
+				
 				PlayerBase player = getPlayer(sender);
 				player.SetPosition(data.param1);
 			}
@@ -299,12 +310,15 @@ class FalconToolsV2
         
         if( type == CallType.Server ) {
 
-			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) {
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				#ifdef FALCON_LOGS
+						FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_SPAWNED_ITEM + data.param1);
+				#endif
+				
 				PlayerBase player = getPlayer(sender);
 				
 				GetGame().CreateObject(data.param1, player.GetPosition(), false, false, false );
-				
-				FalconLogger.logAction(sender.GetId(), data.param1, "adminSpawnedItem");
 			}
         }
     }
@@ -383,6 +397,10 @@ class FalconToolsV2
 				else {
 					PlayerBase targetP = FalconUtils.GetPlayerByName(data.param1);
 					
+					#ifdef FALCON_LOGS
+						FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_FREEZED_PLAYER + data.param1);
+					#endif
+					
 					HumanInputController hic = targetP.GetInputController();
 					
 					if (targetP.getIsFreezed()) {
@@ -419,8 +437,6 @@ class FalconToolsV2
 					PlayerBase player = getPlayer(sender);
 
 					player.SetPosition(targetP.GetPosition());
-					
-					FalconLogger.logAction(sender.GetId(), targetP.GetPosition().ToString(), "adminTP");
 				}
 			}
        	 }
@@ -469,6 +485,10 @@ class FalconToolsV2
 					PlayerBase targetP = FalconUtils.GetPlayerByName(data.param1);
 					
 					targetP.RemoveAllItems();
+					
+					#ifdef FALCON_LOGS
+						FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_STRIPED_PLAYER + data.param1);
+					#endif
 				}
 			}
        	 }
@@ -492,9 +512,12 @@ class FalconToolsV2
 				} 
 				else {
 					PlayerBase targetP = FalconUtils.GetPlayerByName(data.param1);
+					
 					targetP.SetHealth(0);
 					
-					FalconLogger.logAction(sender.GetId(), targetP.GetIdentity().GetName(), "adminKillPlayer");
+					#ifdef FALCON_LOGS
+						FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_KILLED_PLAYER + data.param1);
+					#endif
 				}
 			}
        	 }
@@ -609,6 +632,10 @@ class FalconToolsV2
 					PlayerBase player = getPlayer(sender);
 					ref array<ref ItemInPackage> packageItems = new array<ref ItemInPackage>();
 					
+					#ifdef FALCON_LOGS
+						FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_SPAWNED_ITEM + packageName);
+					#endif
+					
 					packageItems = getItemsPackageByName(packageName);
 
 					for (int i = 0; i < packageItems.Count(); i++)
@@ -666,6 +693,10 @@ class FalconToolsV2
 			{
 				if (data.param1)
 				{
+					#ifdef FALCON_LOGS
+						FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_TELEPORTED + data.param1.ToString());
+					#endif
+					
 					PlayerBase player = getPlayer(sender);
 					
 					player.SetPosition(data.param1);
@@ -676,6 +707,186 @@ class FalconToolsV2
 	
 	void tpOnClick(vector pos) {	
 		GetRPCManager().SendRPC("FalconTools", "tpOnClickS", new Param1<vector>(pos));
+	}
+	
+	private void switchESPS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
+    {
+        Param1<string> data;
+        if ( !ctx.Read( data ) ) return;
+        
+        if( type == CallType.Server ) {
+
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				if (data.param1)
+				{
+					#ifdef FALCON_LOGS
+						FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_SWITCHED_ESP);
+					#endif
+					
+					GetRPCManager().SendRPC("FalconTools", "switchESPC", new Param1<string>(data.param1), true, sender);
+				}
+			}
+       	 }
+    }
+	
+	void playersESP() 
+	{
+		GetRPCManager().SendRPC("FalconTools", "switchESPS", new Param1<string>("players"));
+	}
+	
+	void objectsESP() 
+	{
+		GetRPCManager().SendRPC("FalconTools", "switchESPS", new Param1<string>("objects"));
+	}
+	
+	private void disableESPS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
+    {
+        Param1<vector> data;
+        if ( !ctx.Read( data ) ) return;
+        
+        if( type == CallType.Server ) {
+
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				if (data.param1)
+				{
+					#ifdef FALCON_LOGS
+						//FalconLogsUtils.logAdminAction(sender, FalconLogsMessagesConsts.ADMIN_TELEPORTED + data.param1.ToString());
+					#endif
+					
+					GetRPCManager().SendRPC("FalconTools", "disableESPC", new Param1<string>(""), true, sender);
+				}
+			}
+       	 }
+    }
+	
+	void disableESP() 
+	{
+		GetRPCManager().SendRPC("FalconTools", "disableESPS", new Param1<string>(""));
+	}
+	
+	private void spawnMissionS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
+    {
+        Param1<string> data;
+        if ( !ctx.Read( data ) ) return;
+
+        if( type == CallType.Server ) {
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				if (data.param1)
+				{
+					string missionName = data.param1;
+					
+					#ifdef FALCON_MISSIONS
+					MissionServer mission = MissionServer.Cast(GetGame().GetMission());
+					
+					if (missionName == "HiddenTreasureMission")
+					{
+						mission.getMissionManager().spawnHiddenTreasuresMissionDebug();
+					}
+					else if (missionName == "AirDropMission")
+					{
+						mission.getMissionManager().spawnAirDropMissionDebug();
+					}
+					else if (missionName == "CivilianConvoy")
+					{
+						mission.getMissionManager().spawnCivilianConvoyMissionsDebug();
+					}
+					else if (missionName == "MilitaryConvoy")
+					{
+						mission.getMissionManager().spawnMilitaryConvoyMissionsDebug();
+					}
+					else if (missionName == "PlaneCrash")
+					{
+						mission.getMissionManager().spawnPlaneCrashMissionDebug();
+					}
+					else if (missionName == "RougeFarmers")
+					{
+						mission.getAIMissionManager().spawnRogueFarmersMissionsDebug();
+					}
+					else if (missionName == "BaseKOTH")
+					{
+						mission.getKOTHMissionsManager().spawnBaseKOTHMissionDebug();
+					}
+					#endif 
+				}
+			}
+       	 }
+    }
+	
+	void spawnMission(string missionName)
+	{
+		GetRPCManager().SendRPC("FalconTools", "spawnMissionS", new Param1<string>(missionName));
+	}
+	
+	private void clearMissionsS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
+    {
+        Param1<string> data;
+        if ( !ctx.Read( data ) ) return;
+
+        if( type == CallType.Server ) 
+		{
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				#ifdef FALCON_MISSIONS
+					MissionServer mission = MissionServer.Cast(GetGame().GetMission());
+				
+					mission.getMissionManager().clearMissionsDebug();
+				#endif
+			}
+       	 }
+    }
+	
+	void clearMissions()
+	{
+		GetRPCManager().SendRPC("FalconTools", "clearMissionsS", new Param1<string>(""));
+	}
+	
+	private void clearAIMissionsS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
+    {
+        Param1<string> data;
+        if ( !ctx.Read( data ) ) return;
+
+        if( type == CallType.Server ) 
+		{
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				#ifdef FALCON_MISSIONS
+					MissionServer mission = MissionServer.Cast(GetGame().GetMission());
+				
+					mission.getAIMissionManager().clearMissionsDebug();
+				#endif
+			}
+       	 }
+    }
+	
+	void clearAIMissions()
+	{
+		GetRPCManager().SendRPC("FalconTools", "clearAIMissionsS", new Param1<string>(""));
+	}
+	
+	private void clearKOTHMissionsS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
+    {
+        Param1<string> data;
+        if ( !ctx.Read( data ) ) return;
+
+        if( type == CallType.Server ) 
+		{
+			if (FalconUtils.IsPlayerAnAdmin(sender.GetId())) 
+			{
+				#ifdef FALCON_MISSIONS
+					MissionServer mission = MissionServer.Cast(GetGame().GetMission());
+				
+					mission.getKOTHMissionsManager().clearMissionsDebug();
+				#endif
+			}
+       	 }
+    }
+	
+	void clearKOTHMissions()
+	{
+		GetRPCManager().SendRPC("FalconTools", "clearKOTHMissionsS", new Param1<string>(""));
 	}
 	
 	///TODO: Move utils to another file ? 

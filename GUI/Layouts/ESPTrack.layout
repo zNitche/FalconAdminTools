@@ -1,0 +1,48 @@
+FrameWidgetClass rootFrame {
+ position 10 10
+ size 1877.64001 1057.41003
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ {
+  PanelWidgetClass ESPFramePANEL {
+   ignorepointer 1
+   position 843.96704 490.61002
+   size 106.37801 76.2691
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style rover_sim_black_2
+   {
+    TextWidgetClass DistanceTEXT {
+     ignorepointer 1
+     position 10.3547 9.45026
+     size 82.7607 25.2764
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     "exact text" 1
+     text_proportion 0.05
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass NameTEXT {
+     ignorepointer 1
+     position 11.0228 39.8835
+     size 82.7607 25.854
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     "exact text" 1
+     text_proportion 0.1
+     "text halign" center
+     "text valign" center
+    }
+   }
+  }
+ }
+}

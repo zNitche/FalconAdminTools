@@ -12,6 +12,7 @@ class FalconMonitor extends UIScriptedMenu
 	private ButtonWidget btnBinds;
 	private ButtonWidget btnAdm;
 	private ButtonWidget btnCar;
+	private ButtonWidget btnTruck;
 	private ButtonWidget btnApplyWorld;
 	private ButtonWidget btnApplyPosition;
 	private ButtonWidget btnSpawn;	
@@ -41,7 +42,7 @@ class FalconMonitor extends UIScriptedMenu
 	private TextWidget playerPosZText;
 	private TextWidget playerPosYText;
 	private TextWidget playerOrientationText;
-	private TextWidget playerIdentityTEXT;
+	private EditBoxWidget playerIdentityTEXT;
 	
 	private ButtonWidget BtnTPtoPlayer;
 	private ButtonWidget BtnFreeze;
@@ -49,6 +50,7 @@ class FalconMonitor extends UIScriptedMenu
 	private ButtonWidget BtnHealPlayer;
 	private ButtonWidget BtnStripPlayer;
 	private ButtonWidget BtnKillPlayer;
+	private ButtonWidget BtnCopyID;
 	
 	private bool isInitialized;
     private bool isMenuOpen;
@@ -60,6 +62,30 @@ class FalconMonitor extends UIScriptedMenu
 	private MapWidget falconMAP;
 	private ButtonWidget switchMapBUTTON;
 	
+	private Widget espWidget;
+	private ButtonWidget disableESPBUTTON;
+	private ButtonWidget playersESPBUTTON;
+	private ButtonWidget objectsESPBUTTON;
+	private ButtonWidget switchESPBUTTON;
+	private EditBoxWidget espRangeInput;
+	private ButtonWidget setESPRangeBUTTON;
+	
+	private Widget missionsWidget;
+	
+	private ButtonWidget spawnHiddenTreasuresBUTTON;
+	private ButtonWidget spawnAirDropMissionBUTTON;
+	private ButtonWidget spawnCivilianConvoyMissionBUTTON;
+	private ButtonWidget spawnMilitaryConvoyMissionBUTTON;
+	private ButtonWidget spawnPlaneCrashMissionBUTTON;
+	
+	private ButtonWidget rougeFarmersBUTTON;
+	private ButtonWidget baseKOTHBUTTON;
+	
+	private ButtonWidget switchMISSIONSBUTTON;
+	private ButtonWidget clearMissionsBUTTON;
+	private ButtonWidget clearAIMissionsBUTTON;
+	private ButtonWidget clearKOTHMissionsBUTTON;
+	
 	private EditBoxWidget viewDistanceTEXT;
 	private ButtonWidget viewBUTTON;
 	
@@ -68,6 +94,8 @@ class FalconMonitor extends UIScriptedMenu
 	private Widget currentViewWidget;
 	
 	ref FalconToolsV2 FalconToolsv2;
+	
+	private string dotIcon = "FalconTools\\GUI\\textures\\dot.paa";
 			
 	
 	//Constructor
@@ -115,6 +143,7 @@ class FalconMonitor extends UIScriptedMenu
 			btnSafe = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnSAFE") );
 			btnAdm = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnLOADOUT") );
 			btnCar = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnCAR") );
+			btnTruck = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnTRUCK") );
 			btnApplyWorld = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnApplyWorld") );
 			worldTimeBox = EditBoxWidget.Cast( widgetRoot.FindAnyWidget( "SetTimeBOX" ));
 			btnApplyPosition = ButtonWidget.Cast( widgetRoot.FindAnyWidget("BtnApplyPosition") );
@@ -140,7 +169,7 @@ class FalconMonitor extends UIScriptedMenu
 			
 			playerOrientationText = TextWidget.Cast(widgetRoot.FindAnyWidget("OrientationTEXT"));
 			
-			playerIdentityTEXT = TextWidget.Cast(widgetRoot.FindAnyWidget("PlayerIdentityTEXT"));
+			playerIdentityTEXT = EditBoxWidget.Cast(widgetRoot.FindAnyWidget("PlayerIdentityTEXT"));
 			
 			BtnTPtoPlayer = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnTPtoPlayer")); 
 			BtnFreeze = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnFreeze")); 
@@ -148,6 +177,7 @@ class FalconMonitor extends UIScriptedMenu
 			BtnHealPlayer = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnHealPlayer")); 
 			BtnStripPlayer = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnStripPlayer")); 
 			BtnKillPlayer = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnKillPlayer"));
+			BtnCopyID = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BtnCopyID"));
 			///
 			
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnGM, this, "setGodMode" );
@@ -157,6 +187,7 @@ class FalconMonitor extends UIScriptedMenu
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnSafe, this, "takeMeHome" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnAdm, this, "getAdmLoadout" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnCar, this, "getCar" );
+			WidgetEventHandler.GetInstance().RegisterOnClick( btnTruck, this, "getTruck" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnApplyWorld, this, "applyWorld" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnApplyPosition, this, "applyPosition" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( btnSpawn, this, "spawnItem" );
@@ -171,6 +202,7 @@ class FalconMonitor extends UIScriptedMenu
 			WidgetEventHandler.GetInstance().RegisterOnClick( BtnHealPlayer, this, "healTarget" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( BtnStripPlayer, this, "stripTarget" );
 			WidgetEventHandler.GetInstance().RegisterOnClick( BtnKillPlayer, this, "killTarget" );
+			WidgetEventHandler.GetInstance().RegisterOnClick( BtnCopyID, this, "copyID" );
 			///
 			
 			///Items Spawner
@@ -191,6 +223,51 @@ class FalconMonitor extends UIScriptedMenu
 			invBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("invBUTTON"));
 			WidgetEventHandler.GetInstance().RegisterOnClick( invBUTTON, this, "switchInv" );
 			
+			espWidget = Widget.Cast(widgetRoot.FindAnyWidget("ESPWIDGET"));
+			switchESPBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("ESPBUTTON"));
+			playersESPBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("PlayersESPBUTTON"));
+			objectsESPBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("ObjectsESPBUTTON"));
+			disableESPBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("DisableESPBUTTON"));
+			espRangeInput = EditBoxWidget.Cast(widgetRoot.FindAnyWidget("ESPRangeInput"));
+			setESPRangeBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("SetESPRangeBUTTON"));
+			
+			WidgetEventHandler.GetInstance().RegisterOnClick(switchESPBUTTON, this, "showESPWidget");
+			WidgetEventHandler.GetInstance().RegisterOnClick(playersESPBUTTON, this, "playersESP");
+			WidgetEventHandler.GetInstance().RegisterOnClick(objectsESPBUTTON, this, "objectsESP");
+			WidgetEventHandler.GetInstance().RegisterOnClick(disableESPBUTTON, this, "disableESP");
+			WidgetEventHandler.GetInstance().RegisterOnClick(setESPRangeBUTTON, this, "setESPRange");
+			
+			missionsWidget = Widget.Cast(widgetRoot.FindAnyWidget("MISSIONSWIDGET"));
+			switchMISSIONSBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("MISSIONSBUTTON"));
+			
+			spawnHiddenTreasuresBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("HiddenTreasuresBUTTON"));
+			spawnAirDropMissionBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("AirDropBUTTON"));
+			spawnCivilianConvoyMissionBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("CivilianConvoyBUTTON"));
+			spawnMilitaryConvoyMissionBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("MilitaryConvoyBUTTON"));
+			spawnPlaneCrashMissionBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("PlaneCrashBUTTON"));
+			
+			rougeFarmersBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("RougeFarmersBUTTON"));
+			
+			baseKOTHBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("BaseKOTHBUTTON"));
+			
+			clearMissionsBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("ClearMissionsBUTTON"));
+			clearAIMissionsBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("ClearAIMissionsBUTTON"));
+			clearKOTHMissionsBUTTON = ButtonWidget.Cast(widgetRoot.FindAnyWidget("ClearKOTHMissionsBUTTON"));
+			
+			WidgetEventHandler.GetInstance().RegisterOnClick(switchMISSIONSBUTTON, this, "showMissionsWidget");
+			
+			WidgetEventHandler.GetInstance().RegisterOnClick(spawnHiddenTreasuresBUTTON, this, "spawnHiddenTreasures");
+			WidgetEventHandler.GetInstance().RegisterOnClick(spawnAirDropMissionBUTTON, this, "spawnAirDropMission");
+			WidgetEventHandler.GetInstance().RegisterOnClick(spawnCivilianConvoyMissionBUTTON, this, "spawnCivilianConvoyMission");
+			WidgetEventHandler.GetInstance().RegisterOnClick(spawnMilitaryConvoyMissionBUTTON, this, "spawnMilitaryConvoyMission");
+			WidgetEventHandler.GetInstance().RegisterOnClick(spawnPlaneCrashMissionBUTTON, this, "spawnPlaneCrashMission");
+			WidgetEventHandler.GetInstance().RegisterOnClick(rougeFarmersBUTTON, this, "spawnRougeFarmersMission");
+			WidgetEventHandler.GetInstance().RegisterOnClick(baseKOTHBUTTON, this, "spawnBaseKOTHMission");
+			
+			WidgetEventHandler.GetInstance().RegisterOnClick(clearMissionsBUTTON, this, "clearMissions");
+			WidgetEventHandler.GetInstance().RegisterOnClick(clearAIMissionsBUTTON, this, "clearAIMissions");
+			WidgetEventHandler.GetInstance().RegisterOnClick(clearKOTHMissionsBUTTON, this, "clearKOTHMissions");
+			
 			isInitialized = true;
 		}
 		
@@ -203,7 +280,11 @@ class FalconMonitor extends UIScriptedMenu
 		playersWidget.ClearItems();
 		spawnerPacksLIST.ClearItems();
 		playerWidget.Show(false);
+		espWidget.Show(false);
+		missionsWidget.Show(false);
+
 		falconMAP.ClearUserMarks();
+		mapWidget.Show(true);
 		
 		setPosition();
 		setTime();
@@ -283,6 +364,25 @@ class FalconMonitor extends UIScriptedMenu
 		}
 	}
 	
+	private void setESPRange()
+	{
+		MissionGameplay mission = MissionGameplay.Cast(GetGame().GetMission());
+		
+		string espRange = espRangeInput.GetText();
+		
+		if (espRange)
+		{
+			mission.setESPRange(espRange.ToInt());
+		}
+	}
+	
+	private void initESPRange()
+	{
+		MissionGameplay mission = MissionGameplay.Cast(GetGame().GetMission());
+	
+		espRangeInput.SetText(mission.getESPRange().ToString());
+	}
+	
 	private void setOrientation()
 	{
 		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
@@ -352,6 +452,17 @@ class FalconMonitor extends UIScriptedMenu
 		switchViewWidget(mapWidget);
 	}
 	
+	private void showESPWidget()
+	{
+		switchViewWidget(espWidget);
+		initESPRange();
+	}
+	
+	private void showMissionsWidget()
+	{
+		switchViewWidget(missionsWidget);
+	}
+	
 	private void showPlayerWidget()
 	{
 		switchViewWidget(playerWidget);
@@ -385,8 +496,14 @@ class FalconMonitor extends UIScriptedMenu
 		FalconToolsv2.adm();
 	}
 	
-	private void getCar() {
-		FalconToolsv2.car();
+	private void getCar() 
+	{
+		FalconToolsv2.spawnVehicle("OffroadHatchback");
+	}
+	
+	private void getTruck() 
+	{
+		FalconToolsv2.spawnVehicle("Truck_01_Covered");
 	}
 	
 	private void applyPosition() {
@@ -581,7 +698,7 @@ class FalconMonitor extends UIScriptedMenu
 				
 				for (int i = 0; i < positions.Count(); i++) 
 				{
-					falconMAP.AddUserMark( positions[i].playerPosition, positions[i].playerName, ARGB( 255, 230, 20, 20 ), "gui\textures\dot.paa" );
+					falconMAP.AddUserMark(positions[i].playerPosition, positions[i].playerName, ARGB(255, 230, 20, 20), dotIcon);
 				}
 			}
 		}
@@ -590,6 +707,21 @@ class FalconMonitor extends UIScriptedMenu
 	private void setPlayersPositions() 
 	{
 		FalconToolsv2.setPlayersPositions();
+	}
+	
+	private void playersESP() 
+	{
+		FalconToolsv2.playersESP();
+	}
+	
+	private void objectsESP() 
+	{
+		FalconToolsv2.objectsESP();
+	}
+	
+	private void disableESP() 
+	{
+		FalconToolsv2.disableESP();
 	}
 	
 	private void spawnPack()
@@ -606,6 +738,66 @@ class FalconMonitor extends UIScriptedMenu
 			{
 				FalconToolsv2.spawnPackage(packageName);
 			}
+		}
+	}
+	
+	private void spawnHiddenTreasures()
+	{
+		FalconToolsv2.spawnMission("HiddenTreasureMission");
+	}
+	
+	private void spawnAirDropMission()
+	{
+		FalconToolsv2.spawnMission("AirDropMission");
+	}
+	
+	private void spawnCivilianConvoyMission()
+	{
+		FalconToolsv2.spawnMission("CivilianConvoy");
+	}
+	
+	private void spawnMilitaryConvoyMission()
+	{
+		FalconToolsv2.spawnMission("MilitaryConvoy");
+	}
+	
+	private void spawnPlaneCrashMission()
+	{
+		FalconToolsv2.spawnMission("PlaneCrash");
+	}
+	
+	private void clearMissions()
+	{
+		FalconToolsv2.clearMissions();
+	}
+	
+	private void clearAIMissions()
+	{
+		FalconToolsv2.clearAIMissions();
+	}
+	
+	private void clearKOTHMissions()
+	{
+		FalconToolsv2.clearKOTHMissions();
+	}
+	
+	private void spawnRougeFarmersMission()
+	{
+		FalconToolsv2.spawnMission("RougeFarmers");
+	}
+	
+	private void spawnBaseKOTHMission()
+	{
+		FalconToolsv2.spawnMission("BaseKOTH");
+	}
+	
+	private void copyID()
+	{
+		string id = playerIdentityTEXT.GetText();
+		
+		if (id)
+		{
+			GetGame().CopyToClipboard(id);
 		}
 	}
 	

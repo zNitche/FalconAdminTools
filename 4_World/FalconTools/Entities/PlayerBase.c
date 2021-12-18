@@ -51,22 +51,16 @@ modded class PlayerBase
 		isFreezed = state;
 	}
 	
-	override void OnConnect()
+	override bool CanBeTargetedByAI(EntityAI ai)
 	{
-		super.OnConnect();
+		if (hasGM)
+		{
+			return false;
+		}
 		
-		FalconPlayerTelemetryLogger.logPlayer(GetIdentity().GetName(), GetIdentity().GetId());
-	}
-	
-	override void OnDisconnect() 
-	{
-		string playerId = GetIdentity().GetId();
-		string playerPos = GetPosition().ToString();
-		string playerHealth = GetHealth().ToString();
-		
-		FalconPlayerTelemetryLogger.logPlayerLogoutLocation(playerId, playerPos);
-		FalconPlayerTelemetryLogger.logPlayerLogoutHealth(playerId, playerHealth);
-		
-		super.OnDisconnect();
+		else
+		{
+			return super.CanBeTargetedByAI(ai);
+		}
 	}
 }

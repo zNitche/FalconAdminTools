@@ -34,7 +34,7 @@ FrameWidgetClass rootFrame {
      hexactsize 0
      vexactsize 0
      style Normal
-     text "FalconTools v0.6"
+     text "FalconTools v0.7"
      font "gui/fonts/Metron-Bold28"
      "exact text" 1
      "size to text h" 1
@@ -56,8 +56,8 @@ FrameWidgetClass rootFrame {
     }
     ButtonWidgetClass BtnSAFE {
      visible 1
-     position 0.84013 0.01638
-     size 0.1459 0.055
+     position 0.8997 0.01638
+     size 0.08633 0.055
      valign bottom_ref
      hexactpos 0
      vexactpos 0
@@ -68,7 +68,7 @@ FrameWidgetClass rootFrame {
     }
     ButtonWidgetClass BtnKYS {
      visible 1
-     position 0.13073 0.01609
+     position 0.25778 0.01609
      size 0.12036 0.055
      valign bottom_ref
      hexactpos 0
@@ -87,13 +87,14 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      text "Position"
+     "exact text" 1
      "text halign" center
      "text valign" center
     }
     ButtonWidgetClass BtnHEAL {
      visible 1
      clipchildren 1
-     position 0.25778 0.01609
+     position 0.13073 0.01609
      size 0.12036 0.055
      valign bottom_ref
      hexactpos 0
@@ -112,6 +113,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      text "Stats"
+     "exact text" 1
      "text halign" center
     }
     TextWidgetClass GmCONTENT {
@@ -122,6 +124,7 @@ FrameWidgetClass rootFrame {
      vexactpos 1
      hexactsize 1
      vexactsize 1
+     "exact text" 1
      text_proportion 0.5
      "size to text h" 0
      "size to text v" 0
@@ -156,6 +159,7 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 1
        vexactsize 1
+       "exact text" 1
        text_proportion 0.7
        "text halign" center
        "text valign" center
@@ -188,6 +192,7 @@ FrameWidgetClass rootFrame {
        vexactsize 1
        style Default
        text "1600"
+       "exact text" 1
       }
      }
     }
@@ -210,6 +215,26 @@ FrameWidgetClass rootFrame {
        vexactsize 1
        style Editor
        text "Map"
+      }
+      ButtonWidgetClass ESPBUTTON {
+       position 705.30402 9.28313
+       size 151.13701 35.4053
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "ESP"
+      }
+      ButtonWidgetClass MISSIONSBUTTON {
+       position 869.03601 9.28313
+       size 151.13701 35.4053
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Missions"
       }
      }
     }
@@ -242,6 +267,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      text "World Settings"
+     "exact text" 1
      "text halign" center
      "text valign" center
     }
@@ -292,6 +318,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      style DefaultBorder
+     "exact text" 1
     }
     EditBoxWidgetClass SetPositionBOXX {
      position 1518.30005 206.54799
@@ -301,6 +328,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      scaled 1
+     "exact text" 1
     }
     ButtonWidgetClass BtnApplyPosition {
      visible 1
@@ -323,6 +351,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      scaled 1
+     "exact text" 1
     }
     EditBoxWidgetClass SetPositionBOXZ {
      position 1518.30005 307.30298
@@ -332,6 +361,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      scaled 1
+     "exact text" 1
     }
     TextWidgetClass PostitionTITLE0 {
      ignorepointer 1
@@ -342,6 +372,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      text "X"
+     "exact text" 1
      "text halign" center
      "text valign" center
     }
@@ -354,6 +385,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      text "Z"
+     "exact text" 1
      "text halign" center
      "text valign" center
     }
@@ -366,6 +398,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      text "Y"
+     "exact text" 1
      "text halign" center
      "text valign" center
     }
@@ -378,6 +411,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      text "Players Settings"
+     "exact text" 1
      "text halign" center
      "text valign" center
     }
@@ -400,6 +434,7 @@ FrameWidgetClass rootFrame {
      vexactsize 1
      scaled 1
      style DefaultBorder
+     "exact text" 1
     }
     ButtonWidgetClass BtnSpawn {
      visible 1
@@ -423,6 +458,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      text "Item Spawner"
+     "exact text" 1
      "text halign" center
      "text valign" center
     }
@@ -524,6 +560,7 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        text "X"
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
@@ -536,6 +573,7 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        text "Z"
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
@@ -548,6 +586,7 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        text "Y"
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
@@ -625,6 +664,7 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        text "HP"
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
@@ -650,10 +690,11 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        text "Player Identity"
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
-      TextWidgetClass PlayerIdentityTEXT {
+      EditBoxWidgetClass PlayerIdentityTEXT {
        ignorepointer 1
        position 25.19 503.79001
        size 818.65894 50.379
@@ -661,9 +702,21 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       text_proportion 0.5
-       "text halign" center
-       "text valign" center
+       style DefaultBorder
+       "exact text" 1
+      }
+      ButtonWidgetClass BtnCopyID {
+       visible 1
+       clipchildren 1
+       position 0.4058 0.3
+       size 0.15942 0.05714
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Editor
+       text "Copy ID"
       }
      }
     }
@@ -675,13 +728,14 @@ FrameWidgetClass rootFrame {
      vexactpos 1
      hexactsize 1
      vexactsize 1
+     "exact text" 1
      "text halign" center
      "text valign" center
     }
     ButtonWidgetClass BtnBinds {
      visible 1
      clipchildren 1
-     position 0.72942 0.01609
+     position 0.81277 0.01609
      size 0.08336 0.055
      valign bottom_ref
      hexactpos 0
@@ -699,6 +753,7 @@ FrameWidgetClass rootFrame {
      vexactpos 1
      hexactsize 1
      vexactsize 1
+     "exact text" 1
      text_proportion 0.5
      "size to text h" 0
      "size to text v" 0
@@ -724,6 +779,7 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        text "Message Players"
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
@@ -745,6 +801,7 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        style DefaultBorder
+       "exact text" 1
       }
      }
     }
@@ -757,10 +814,12 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      text "Direction"
+     "exact text" 1
      "text halign" center
      "text valign" center
     }
     PanelWidgetClass MapWIDGET {
+     visible 0
      ignorepointer 1
      position 548.50598 93.1926
      size 869.03802 881.633
@@ -783,7 +842,7 @@ FrameWidgetClass rootFrame {
     ButtonWidgetClass invBUTTON {
      visible 1
      clipchildren 1
-     position 0.63892 0.01609
+     position 0.75259 0.01609
      size 0.0534 0.055
      valign bottom_ref
      hexactpos 0
@@ -792,6 +851,317 @@ FrameWidgetClass rootFrame {
      vexactsize 0
      style Editor
      text "Inv"
+    }
+    PanelWidgetClass ESPWIDGET {
+     visible 0
+     ignorepointer 1
+     position 548.50598 93.1926
+     size 869.03802 881.633
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+     {
+      TextWidgetClass ESPTITLE {
+       ignorepointer 1
+       position 12.5948 12.5947
+       size 843.84796 51.1487
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Falcon ESP"
+       text_proportion 0.5
+       "text halign" center
+       "text valign" center
+      }
+      ButtonWidgetClass DisableESPBUTTON {
+       position 642.33301 818.65894
+       size 210.96199 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Disable ESP"
+       text_proportion 0.5
+      }
+      ButtonWidgetClass PlayersESPBUTTON {
+       position 331.01501 94.4955
+       size 207.009 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Players"
+       text_proportion 0.5
+      }
+      ButtonWidgetClass ObjectsESPBUTTON {
+       position 331.01501 176.36101
+       size 207.009 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Objects"
+       text_proportion 0.5
+      }
+      EditBoxWidgetClass ESPRangeInput {
+       position 239.30101 818.65894
+       size 226.705 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style DefaultBorder
+      }
+      TextWidgetClass ESPRangeTITLE {
+       ignorepointer 1
+       position 12.5952 818.65894
+       size 214.11101 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "ESP Range"
+       "exact text" 1
+       "text halign" center
+       "text valign" center
+      }
+      ButtonWidgetClass SetESPRangeBUTTON {
+       position 478.60101 818.65894
+       size 125.94801 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Set"
+       text_proportion 0.5
+      }
+     }
+    }
+    PanelWidgetClass MISSIONSWIDGET {
+     visible 1
+     ignorepointer 1
+     position 548.50598 93.1926
+     size 869.03802 881.633
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style editor_quad
+     {
+      TextWidgetClass MISSIONSTITLE {
+       ignorepointer 1
+       position 12.5948 12.5947
+       size 843.84796 51.1487
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Falcon Missions"
+       "exact text" 0
+       text_proportion 0.5
+       "text halign" center
+       "text valign" center
+      }
+      ButtonWidgetClass ClearMissionsBUTTON {
+       position 25.19 818.65894
+       size 210.96199 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Clear Non AI Missions"
+       text_proportion 0.5
+      }
+      ButtonWidgetClass HiddenTreasuresBUTTON {
+       position 37.78471 151.13701
+       size 188.92101 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "HiddenTreasures"
+       text_proportion 0.5
+      }
+      PanelWidgetClass PanelWidget7 {
+       ignorepointer 1
+       position 12.5952 138.54199
+       size 843.84796 151.13701
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style editor_quad
+      }
+      TextWidgetClass MISSIONSTITLE0 {
+       ignorepointer 1
+       position 12.5952 75.5685
+       size 843.84796 51.1487
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Spawn Missions Non AI"
+       text_proportion 0.5
+       "text halign" center
+       "text valign" center
+      }
+      ButtonWidgetClass AirDropBUTTON {
+       position 239.30101 151.13701
+       size 176.32701 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "AirDrop"
+       text_proportion 0.5
+      }
+      ButtonWidgetClass CivilianConvoyBUTTON {
+       position 428.22202 151.13701
+       size 188.922 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Civilian Convoy"
+       text_proportion 0.5
+      }
+      ButtonWidgetClass MilitaryConvoyBUTTON {
+       position 629.73804 151.13701
+       size 188.922 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Military Convoy"
+       text_proportion 0.5
+      }
+      ButtonWidgetClass PlaneCrashBUTTON {
+       position 37.78471 214.11101
+       size 188.922 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Plane Crash"
+       text_proportion 0.5
+      }
+      TextWidgetClass MISSIONSTITLE1 {
+       ignorepointer 1
+       position 12.5952 302.27402
+       size 843.84796 51.1487
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "AI Missions"
+       text_proportion 0.5
+       "text halign" center
+       "text valign" center
+      }
+      PanelWidgetClass PanelWidget8 {
+       ignorepointer 1
+       position 12.5952 365.24802
+       size 843.84796 151.13701
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style editor_quad
+      }
+      ButtonWidgetClass RougeFarmersBUTTON {
+       position 37.78471 377.84299
+       size 188.92101 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Rogue Farmers"
+       text_proportion 0.5
+      }
+      ButtonWidgetClass ClearAIMissionsBUTTON {
+       position 629.73804 818.65894
+       size 210.96199 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Clear AI Missions"
+       text_proportion 0.5
+      }
+      TextWidgetClass MISSIONSTITLE2 {
+       ignorepointer 1
+       position 12.5952 528.98004
+       size 843.84796 51.1487
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "KOTH missions"
+       text_proportion 0.5
+       "text halign" center
+       "text valign" center
+      }
+      PanelWidgetClass PanelWidget9 {
+       ignorepointer 1
+       position 12.5952 591.953
+       size 843.84796 151.13701
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style editor_quad
+      }
+      ButtonWidgetClass ClearKOTHMissionsBUTTON {
+       position 327.46399 818.65894
+       size 210.96199 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Clear KOTH Missions"
+       text_proportion 0.5
+      }
+      ButtonWidgetClass BaseKOTHBUTTON {
+       position 25.19 604.54797
+       size 188.92101 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style Editor
+       text "Base KOTH"
+       text_proportion 0.5
+      }
+     }
+    }
+    ButtonWidgetClass BtnTRUCK {
+     visible 1
+     clipchildren 1
+     position 0.63223 0.01609
+     size 0.1003 0.055
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Editor
+     text "Truck"
     }
    }
   }
