@@ -1,7 +1,5 @@
 # FalconAdminTools
 
-![GUI Preview](https://github.com/TheZodiaCC/FalconAdminTools/blob/main/FT/ft.png)
-
 ### Description
 Admin GUI tool for unreleased `FalconModPack` for `DayZ 1.11`
 
