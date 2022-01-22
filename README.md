@@ -13,12 +13,14 @@ Admin GUI tool for unreleased `FalconModPack` for `DayZ 1.11`
 - Tp player to yourself
 - Kill player
 - Freeze player
+- Strip player
 - Heal yourself/player
 - Spawn predefined lodouts/item creates
 - Spawn cars
 - Tp to predefined safe point
 - Turn On/Off Godmode
 - Simple Player telemetry (logging health, position)
+- Integration with `FalconMissions`
 
 ### Key Bindings
 - `Numlock` Turn On/Off Admn Panel
