@@ -1,7 +1,7 @@
 # FalconAdminTools
 
 ### Description
-Admin GUI tool for unreleased `FalconModPack` for `DayZ 1.11`
+Admin GUI tool for unreleased `FalconModPack` for `DayZ 1.15`
 
 ### Setup
 1. Create `FT` directory inside your server profile
